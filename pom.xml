@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ru.ssau.tk.Ildar.LabSgau</groupId>
-    <artifactId>Ildar-LabSgau</artifactId>
+    <groupId>ru.ssau.tk.IldarValeria.LabSgau</groupId>
+    <artifactId>IldarValeria-LabSgau</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
