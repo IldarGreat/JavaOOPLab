@@ -5,4 +5,5 @@ public class LnFunction implements MathFunction{  // По требованию �
     public double apply(double x){
         return Math.log(x);
     }
+
 }
