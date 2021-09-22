@@ -13,6 +13,8 @@ public class SqrtFunctionTest {
     public void testApply(){
         SqrtFunction someObject = new SqrtFunction();
         Assert.assertEquals(someObject.apply(29),5.3851,DELTA);
+        Assert.assertEquals(someObject.apply(-32),Double.NaN);
+        Assert.assertEquals(someObject.apply(51.0/31.0),1.2826,DELTA);
         Assert.assertEquals(someObject.apply(Double.POSITIVE_INFINITY),Double.POSITIVE_INFINITY);
         Assert.assertEquals(someObject.apply(Double.NEGATIVE_INFINITY),Double.NaN);
         Assert.assertEquals(someObject.apply(Double.NaN),Double.NaN);
