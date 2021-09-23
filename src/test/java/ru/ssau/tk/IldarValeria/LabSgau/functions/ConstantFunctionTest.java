@@ -11,7 +11,7 @@ public class ConstantFunctionTest {
     @Test
     public void testApply() {
         ConstantFunction someObject = new ConstantFunction(666);
-        Assert.assertEquals(someObject.apply(-4324), 666.0,DELTA);
+        Assert.assertEquals(someObject.apply(-4324), 666.0, DELTA);
         Assert.assertEquals(someObject.apply(Double.NaN), 666.0);
         Assert.assertEquals(someObject.apply(Double.POSITIVE_INFINITY), 666.0);
         Assert.assertEquals(someObject.apply(Double.NEGATIVE_INFINITY), 666.0);
