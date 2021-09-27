@@ -19,4 +19,6 @@ public class LnFunctionTest {
         Assert.assertEquals(someObject.apply(Double.NaN), Double.NaN);
     }
 
+
+
 }
