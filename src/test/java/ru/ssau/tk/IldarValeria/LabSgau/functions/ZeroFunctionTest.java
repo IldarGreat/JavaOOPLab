@@ -11,11 +11,11 @@ public class ZeroFunctionTest {
     @Test
     public void testApply() {
         ZeroFunction someObject = new ZeroFunction();
-        Assert.assertEquals(someObject.apply(83), 0.0,DELTA);
-        Assert.assertEquals(someObject.apply(-12383), 0.0,DELTA);
-        Assert.assertEquals(someObject.apply(Double.NaN), 0.0,DELTA);
-        Assert.assertEquals(someObject.apply(Double.POSITIVE_INFINITY),0.0);
-        Assert.assertEquals(someObject.apply(Double.NEGATIVE_INFINITY),0.0);
+        Assert.assertEquals(someObject.apply(83), 0.0, DELTA);
+        Assert.assertEquals(someObject.apply(-12383), 0.0, DELTA);
+        Assert.assertEquals(someObject.apply(Double.NaN), 0.0, DELTA);
+        Assert.assertEquals(someObject.apply(Double.POSITIVE_INFINITY), 0.0);
+        Assert.assertEquals(someObject.apply(Double.NEGATIVE_INFINITY), 0.0);
     }
 
 }
