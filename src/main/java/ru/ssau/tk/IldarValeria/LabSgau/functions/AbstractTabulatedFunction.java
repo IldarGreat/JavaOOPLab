@@ -1,8 +1,6 @@
 package ru.ssau.tk.IldarValeria.LabSgau.functions;
 
 public abstract class AbstractTabulatedFunction implements TabulatedFunction {
-    public int count;
-
     protected abstract int floorIndexOfX(double x);
 
     protected abstract double extrapolateLeft(double x);
@@ -22,6 +20,5 @@ public abstract class AbstractTabulatedFunction implements TabulatedFunction {
         if (indexOfX(x) != -1) return getY(indexOfX(x));
         return interpolate(x, floorIndexOfX(x));
     }
-
 
 }
