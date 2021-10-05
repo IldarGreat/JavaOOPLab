@@ -9,13 +9,12 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
         for (int element = 0; element < xValues.length; element++) {
             addNode(xValues[element], yValues[element]);
-            count ++;
         }
     }
 
     public LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
         double intervalSplittingStep = (xTo - xFrom) / (count - 1);
-        for (int element = 0; element < count - 1; element++) {
+        for (int element = 0; element < count ; element++) {
             addNode(xFrom + element * intervalSplittingStep, source.apply(xFrom + element * intervalSplittingStep));
         }
     }
@@ -39,8 +38,11 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     private Node getNode(int index) {
+        if (index == count){
+            return null;
+        }
         Node indexNode;
-        if (index < count / 2) {
+        if (index < (double)count / 2) {
             indexNode = head;
             for (int element = 0; element <= count / 2; element++) {
                 if (element == index) {
@@ -53,7 +55,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
             indexNode = head.prev;
             for (int element = count; element >= count / 2; element--) {
                 if (element == index) {
-                    return indexNode;
+                    return indexNode.next;
                 } else {
                     indexNode = indexNode.prev;
                 }
