@@ -3,7 +3,7 @@ package ru.ssau.tk.IldarValeria.LabSgau.functions;
 import java.util.Objects;
 
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
-    private int count=0;
+    private int count = 0;
     private Node head;
 
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
@@ -13,9 +13,9 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     public LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
-        double intervalSplittingStep = (xTo - xFrom) / (count - 1);
-        for (int element = 0; element < count ; element++) {
-            addNode(xFrom + element * intervalSplittingStep, source.apply(xFrom + element * intervalSplittingStep));
+        double step = (xTo - xFrom) / (count - 1);
+        for (int element = 0; element < count; element++) {
+            addNode(xFrom + element * step, source.apply(xFrom + element * step));
         }
     }
 
@@ -38,11 +38,11 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     private Node getNode(int index) {
-        if (index == count){
+        if (index == count) {
             return null;
         }
         Node indexNode;
-        if (index < (double)count / 2) {
+        if (index < (double) count / 2) {
             indexNode = head;
             for (int element = 0; element <= count / 2; element++) {
                 if (element == index) {
@@ -64,6 +64,34 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         return null;
     }
 
+    public Node floorNodeOfX(double x) {
+        Node currentNode = head;
+        Node nearestNode = head.next;
+        for (int element = 0; element < count; element++) {
+            if ((x > currentNode.x && x < nearestNode.x) || (Math.abs(currentNode.x - x) < 0.0001)) {
+                return currentNode;
+            }
+            nearestNode = nearestNode.next;
+            currentNode = currentNode.next;
+        }
+        if (head.x > x) {
+            return head;
+        }
+        return head.prev;
+    }
+
+    @Override
+    public double apply(double x) {
+        if (x < leftBound()) {
+            return extrapolateLeft(x);
+        }
+        if (x > rightBound()) {
+            return extrapolateRight(x);
+        }
+        Node node = floorNodeOfX(x);
+        return interpolate(x, node.x, node.next.x, node.y, node.next.y);
+    }
+
     @Override
     public int getCount() {
         return count;
@@ -78,7 +106,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     public double rightBound() {
         return head.prev.x;
     }
-
 
     @Override
     public double getX(int index) {
@@ -121,14 +148,17 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public int floorIndexOfX(double x) {
-        if (indexOfX(x) != -1) {
-            return indexOfX(x);
-        }
-        Node node = head;
+        Node currentNode = head;
+        Node nearestNode = head.next;
         for (int element = 0; element < count; element++) {
-            if (node.x > x) {
+            if ((x > currentNode.x && x < nearestNode.x) || (Math.abs(currentNode.x - x) < 0.0001)) {
                 return element;
             }
+            nearestNode = nearestNode.next;
+            currentNode = currentNode.next;
+        }
+        if (head.x > x) {
+            return 0;
         }
         return count;
     }

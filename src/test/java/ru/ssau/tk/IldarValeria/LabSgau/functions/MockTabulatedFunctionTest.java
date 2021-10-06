@@ -11,6 +11,7 @@ public class MockTabulatedFunctionTest {
     public void testInterpolate() {
         MockTabulatedFunction mockObject = new MockTabulatedFunction();
         Assert.assertEquals(mockObject.interpolate(1.5, 1.3, 2.8, 1.4, 2.9), 1.5999, DELTA);
+        Assert.assertEquals(mockObject.interpolate(4.2, 0.8, 3.2, 1, 3.2), 4.1166, DELTA);
     }
 
     @Test

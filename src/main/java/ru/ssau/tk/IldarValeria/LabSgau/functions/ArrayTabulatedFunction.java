@@ -14,15 +14,13 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     public ArrayTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
-        double intervalSplittingStep = (xTo - xFrom) / count;
+        double step = (xTo - xFrom) / (count - 1);
         double[] xValues = new double[count];
         double[] yValues = new double[count];
         xValues[0] = xFrom;
         yValues[0] = source.apply(xFrom);
-        xValues[count - 1] = xTo;
-        yValues[count - 1] = source.apply(xTo);
-        for (int element = 1; element < count - 1; element++) {
-            xValues[element] = xValues[element - 1] + intervalSplittingStep;
+        for (int element = 1; element < count; element++) {
+            xValues[element] = xValues[element - 1] + step;
             yValues[element] = source.apply(xValues[element]);
         }
         this.count = count;
@@ -63,7 +61,9 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     @Override
     public int indexOfX(double x) {
         for (int element = 0; element < this.count; element++) {
-            if (Math.abs(xValues[element] - x) < 0.0001) return element;
+            if (Math.abs(xValues[element] - x) < 0.0001) {
+                return element;
+            }
         }
         return -1;
     }
@@ -71,19 +71,25 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     @Override
     public int indexOfY(double y) {
         for (int element = 0; element < this.count; element++) {
-            if (Math.abs(yValues[element] - y) < 0.0001) return element;
+            if (Math.abs(yValues[element] - y) < 0.0001) {
+                return element;
+            }
         }
         return -1;
     }
 
     @Override
     public int floorIndexOfX(double x) {
-        for (int element = 0; element < this.count; element++) {
-            if (Math.abs(xValues[element] - x) < 0.0001) return element;
+        if (indexOfX(x) != -1) {
+            return indexOfX(x);
         }
         for (int element = 0; element < this.count; element++) {
-            if (x < xValues[element] && element != 0) return element - 1;
-            if (x < xValues[element]) return 0;
+            if (x < xValues[element] && element != 0) {
+                return element - 1;
+            }
+            if (x < xValues[element]) {
+                return 0;
+            }
         }
         return this.count;
     }

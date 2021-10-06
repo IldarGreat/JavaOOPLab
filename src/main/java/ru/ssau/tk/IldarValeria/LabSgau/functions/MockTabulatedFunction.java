@@ -30,13 +30,17 @@ public class MockTabulatedFunction extends AbstractTabulatedFunction {
     //////////////////////////////////////////////////////////
     @Override
     public int indexOfY(double y) {
-        if (y == this.y0) return 0;
+        if (y == this.y0) {
+            return 0;
+        }
         return 1;
     }
 
     @Override
     public int indexOfX(double x) {
-        if (x == this.x0) return 0;
+        if (x == this.x0) {
+            return 0;
+        }
         return 1;
     }
 
@@ -47,13 +51,17 @@ public class MockTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public double getY(int index) {
-        if (index == 0) return this.y0;
+        if (index == 0) {
+            return this.y0;
+        }
         return this.y1;
     }
 
     @Override
     public double getX(int index) {
-        if (index == 0) return this.x0;
+        if (index == 0) {
+            return this.x0;
+        }
         return this.x1;
     }
 
