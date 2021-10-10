@@ -4,13 +4,13 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class LinkedListTabulatedFunctionTest {
-    public static final double DELTA = 0.0001;
-    public static final double STEP = (100.0 - 1.0) / 99.0;
-    static double[] x = {1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7};
-    static double[] y = {8.8, 9.9, 11.1, 12.2, 13.3, 14.4, 15.5};
-    static LnFunction lnFunction = new LnFunction();
-    static LinkedListTabulatedFunction linkedListTabulatedFunction = new LinkedListTabulatedFunction(x, y);
-    static LinkedListTabulatedFunction linkedListTabulatedFunctionTwo = new LinkedListTabulatedFunction(lnFunction, 1, 100, 100);
+    private static final double DELTA = 0.0001;
+    private static final double STEP = (100.0 - 1.0) / 99.0;
+    private static final double[] x = {1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7};
+    private static final double[] y = {8.8, 9.9, 11.1, 12.2, 13.3, 14.4, 15.5};
+    private static final LnFunction lnFunction = new LnFunction();
+    private static final LinkedListTabulatedFunction linkedListTabulatedFunction = new LinkedListTabulatedFunction(x, y);
+    private static final LinkedListTabulatedFunction linkedListTabulatedFunctionTwo = new LinkedListTabulatedFunction(lnFunction, 1, 100, 100);
 
     @Test
     public static void testGetCount() {
@@ -83,12 +83,12 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public static void testExtrapolateLeft() {
-        Assert.assertEquals(linkedListTabulatedFunction.extrapolateLeft(0.325), 0.3249, DELTA);
-        Assert.assertEquals(linkedListTabulatedFunction.extrapolateLeft(0.154), 0.1539, DELTA);
-        Assert.assertEquals(linkedListTabulatedFunction.extrapolateLeft(0.245), 0.2449, DELTA);
+        Assert.assertEquals(linkedListTabulatedFunction.extrapolateLeft(0.325), 8.025, DELTA);
+        Assert.assertEquals(linkedListTabulatedFunction.extrapolateLeft(0.154), 7.8540, DELTA);
+        Assert.assertEquals(linkedListTabulatedFunction.extrapolateLeft(0.245), 7.9450, DELTA);
         Assert.assertEquals(linkedListTabulatedFunction.extrapolateLeft(Double.NEGATIVE_INFINITY), Double.NEGATIVE_INFINITY);
-        Assert.assertEquals(linkedListTabulatedFunctionTwo.extrapolateLeft(0.85), 0.85, DELTA);
-        Assert.assertEquals(linkedListTabulatedFunctionTwo.extrapolateLeft(0.154), 0.1539, DELTA);
+        Assert.assertEquals(linkedListTabulatedFunctionTwo.extrapolateLeft(0.85), -0.1039, DELTA);
+        Assert.assertEquals(linkedListTabulatedFunctionTwo.extrapolateLeft(0.154), -0.5864, DELTA);
     }
 
     @Test
@@ -121,17 +121,20 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public static void testApply() {
-        Assert.assertEquals(linkedListTabulatedFunctionTwo.apply(3.4), 1.2136, DELTA);
-        Assert.assertEquals(linkedListTabulatedFunctionTwo.apply(7.89), 2.0647, DELTA);
+        Assert.assertEquals(linkedListTabulatedFunction.apply(1.1), 8.8);
+        Assert.assertEquals(linkedListTabulatedFunction.apply(3.5), 11.2999, DELTA);
+        Assert.assertEquals(linkedListTabulatedFunction.apply(0.7), 8.4, DELTA);
+        Assert.assertEquals(linkedListTabulatedFunction.apply(10.2), 17.9999, DELTA);
     }
 
     @Test
     public static void testSetY() {
-        linkedListTabulatedFunction.setY(1, 4.5);
-        linkedListTabulatedFunction.setY(0, 34.6);
-        linkedListTabulatedFunction.setY(6, 55.5);
-        Assert.assertEquals(linkedListTabulatedFunction.getY(1), 4.5);
-        Assert.assertEquals(linkedListTabulatedFunction.getY(0), 34.6);
-        Assert.assertEquals(linkedListTabulatedFunction.getY(6), 55.5);
+        double[] x = {1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7};
+        double[] y = {1, 2, 3, 4, 5, 6, 7};
+        LinkedListTabulatedFunction linkedListTabulatedFunctionThree = new LinkedListTabulatedFunction(x, y);
+        linkedListTabulatedFunctionThree.setY(0, 1.5);
+        linkedListTabulatedFunctionThree.setY(6, 5);
+        Assert.assertEquals(linkedListTabulatedFunctionThree.getY(0), 1.5);
+        Assert.assertEquals(linkedListTabulatedFunctionThree.getY(6), 5.0);
     }
 }

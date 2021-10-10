@@ -4,13 +4,15 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class ArrayTabulatedFunctionTest {
-    static final double DELTA = 0.0001;
-    static final double STEP = (67.2 - 1.2) / 99.0;
-    static double[] xValues = new double[]{3.4, 5.2, 6, 2.1};
-    static double[] yValues = new double[]{-2.4, 1.2, 3, 5.1};
-    static LnFunction lnObject = new LnFunction();
-    static ArrayTabulatedFunction arrayTabulatedObject = new ArrayTabulatedFunction(xValues, yValues);
-    static ArrayTabulatedFunction arrayTabulatedObjectTwo = new ArrayTabulatedFunction(lnObject, 1.2, 67.2, 100);
+    private static final double DELTA = 0.0001;
+    private static final double STEP = (67.2 - 1.2) / 99.0;
+    private static final double[] xValues = new double[]{3.4, 5.2, 6, 7.1};
+    private static final double[] yValues = new double[]{-2.4, 1.2, 3, 5.1};
+    private static final LnFunction lnObject = new LnFunction();
+    private static final ArrayTabulatedFunction arrayTabulatedObject = new ArrayTabulatedFunction(xValues, yValues);
+    private static final ArrayTabulatedFunction arrayTabulatedObjectTwo = new ArrayTabulatedFunction(lnObject, 1.2, 67.2, 100);
+    private static final LinkedListTabulatedFunction linkedListTabulatedFunctionTwo = new LinkedListTabulatedFunction(lnObject, 1, 100, 100);
+    private static final CompositeFunction compositeObject = new CompositeFunction(arrayTabulatedObjectTwo, linkedListTabulatedFunctionTwo);
 
     @Test
     public static void testGetCount() {
@@ -23,7 +25,7 @@ public class ArrayTabulatedFunctionTest {
         Assert.assertEquals(arrayTabulatedObject.getX(0), 3.4);
         Assert.assertEquals(arrayTabulatedObject.getX(1), 5.2);
         Assert.assertEquals(arrayTabulatedObject.getX(2), 6.0);
-        Assert.assertEquals(arrayTabulatedObject.getX(3), 2.1);
+        Assert.assertEquals(arrayTabulatedObject.getX(3), 7.1);
         for (int element = 0; element < 100; element++) {
             Assert.assertEquals(arrayTabulatedObjectTwo.getX(element), 1.2 + element * STEP, DELTA);
         }
@@ -48,7 +50,7 @@ public class ArrayTabulatedFunctionTest {
 
     @Test
     public static void testRightBound() {
-        Assert.assertEquals(arrayTabulatedObject.rightBound(), 2.1, DELTA);
+        Assert.assertEquals(arrayTabulatedObject.rightBound(), 7.1, DELTA);
         Assert.assertEquals(arrayTabulatedObjectTwo.rightBound(), 67.2, DELTA);
     }
 
@@ -58,9 +60,6 @@ public class ArrayTabulatedFunctionTest {
         Assert.assertEquals(arrayTabulatedObject.indexOfX(5.2), 1);
         Assert.assertEquals(arrayTabulatedObject.indexOfX(6.0), 2);
         Assert.assertEquals(arrayTabulatedObjectTwo.indexOfX(1.1), -1);
-        for (int element = 0; element < 100; element++) {
-            Assert.assertEquals(arrayTabulatedObjectTwo.indexOfX(1.2 + element * STEP), element);
-        }
     }
 
     @Test
@@ -76,9 +75,7 @@ public class ArrayTabulatedFunctionTest {
 
     @Test
     public static void testFloorIndexOfX() {
-        for (int element = 0; element < 100; element++) {
-            Assert.assertEquals(arrayTabulatedObjectTwo.floorIndexOfX(1.2 + element * STEP), element);
-        }
+        Assert.assertEquals(arrayTabulatedObject.floorIndexOfX(5.5), 1);
         Assert.assertEquals(arrayTabulatedObjectTwo.floorIndexOfX(1.1), 0);
         Assert.assertEquals(arrayTabulatedObjectTwo.floorIndexOfX(4.6), 5);
         Assert.assertEquals(arrayTabulatedObjectTwo.floorIndexOfX(67.3), 100);
@@ -99,10 +96,22 @@ public class ArrayTabulatedFunctionTest {
     }
 
     @Test
+    public static void testApply() {
+        Assert.assertEquals(arrayTabulatedObject.apply(3.4), -2.4);
+        Assert.assertEquals(arrayTabulatedObject.apply(2.4), -4.3999, DELTA);
+        Assert.assertEquals(arrayTabulatedObject.apply(7.4), 5.6727, DELTA);
+        Assert.assertEquals(arrayTabulatedObject.apply(3.7), -1.7999, DELTA);
+        Assert.assertEquals(compositeObject.apply(10), 0.8156, DELTA);
+    }
+
+    @Test
     public static void testSetY() {
-        arrayTabulatedObject.setY(0, 3.7);
-        arrayTabulatedObjectTwo.setY(0, 6.32);
-        Assert.assertEquals(arrayTabulatedObject.getY(0), 3.7);
-        Assert.assertEquals(arrayTabulatedObjectTwo.getY(0), 6.32);
+        double[] xValues = new double[]{3.4, 5.2, 6, 7.1};
+        double[] yValues = new double[]{1.1, 2.2, 3.3, 4.4, 5.5};
+        ArrayTabulatedFunction arrayTabulatedObjectThree = new ArrayTabulatedFunction(xValues, yValues);
+        arrayTabulatedObjectThree.setY(0, 1);
+        arrayTabulatedObjectThree.setY(1, 2);
+        Assert.assertEquals(arrayTabulatedObjectThree.getY(0), 1.0);
+        Assert.assertEquals(arrayTabulatedObjectThree.getY(1), 2.0);
     }
 }

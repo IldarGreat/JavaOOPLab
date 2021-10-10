@@ -165,16 +165,25 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public double extrapolateLeft(double x) {
-        return head.y + (head.next.y - head.y) * (x - head.y) / (head.next.y - head.y);
+        if (count == 1) {
+            return Objects.requireNonNull(getNode(0)).y;
+        }
+        return interpolate(x, 0);
     }
 
     @Override
     public double extrapolateRight(double x) {
-        return head.prev.prev.y + (head.prev.y - head.prev.prev.y) * (x - head.prev.prev.x) / (head.prev.x - head.prev.prev.x);
+        if (count == 1) {
+            return Objects.requireNonNull(getNode(0)).y;
+        }
+        return interpolate(x, count - 2);
     }
 
     @Override
     public double interpolate(double x, int floorIndex) {
-        return Objects.requireNonNull(getNode(floorIndex)).y + (Objects.requireNonNull(getNode(floorIndex + 1)).y - Objects.requireNonNull(getNode(floorIndex)).y) * (x - Objects.requireNonNull(getNode(floorIndex)).x) / (Objects.requireNonNull(getNode(floorIndex + 1)).x - Objects.requireNonNull(getNode(floorIndex)).x);
+        if (count == 1) {
+            return Objects.requireNonNull(getNode(0)).y;
+        }
+        return super.interpolate(x, Objects.requireNonNull(getNode(floorIndex)).x, Objects.requireNonNull(getNode(floorIndex + 1)).x, Objects.requireNonNull(getNode(floorIndex)).y, Objects.requireNonNull(getNode(floorIndex + 1)).y);
     }
 }

@@ -61,7 +61,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     @Override
     public int indexOfX(double x) {
         for (int element = 0; element < this.count; element++) {
-            if (Math.abs(xValues[element] - x) < 0.0001) {
+            if (xValues[element] == x) {
                 return element;
             }
         }
@@ -71,7 +71,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     @Override
     public int indexOfY(double y) {
         for (int element = 0; element < this.count; element++) {
-            if (Math.abs(yValues[element] - y) < 0.0001) {
+            if (yValues[element] == y) {
                 return element;
             }
         }
@@ -96,16 +96,26 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public double extrapolateLeft(double x) {
-        return yValues[0] + (yValues[1] - yValues[0]) * (x - xValues[0]) / (xValues[1] - xValues[0]);
+        if (count == 1) {
+            return yValues[0];
+        }
+        return interpolate(x, 0);
     }
 
     @Override
     public double extrapolateRight(double x) {
-        return yValues[count - 2] + (yValues[count - 1] - yValues[count - 2]) * (x - xValues[count - 2]) / (xValues[count - 1] - xValues[count - 2]);
+        if (count == 1) {
+            return yValues[0];
+        }
+        return interpolate(x, count - 2);
     }
 
     @Override
     public double interpolate(double x, int floorIndex) {
-        return yValues[floorIndex] + (yValues[floorIndex + 1] - yValues[floorIndex]) * (x - xValues[floorIndex]) / (xValues[floorIndex + 1] - xValues[floorIndex]);
+        if (count == 1) {
+            return yValues[0];
+        }
+        return super.interpolate(x, xValues[floorIndex], xValues[floorIndex + 1], yValues[floorIndex], yValues[floorIndex + 1]);
     }
+
 }

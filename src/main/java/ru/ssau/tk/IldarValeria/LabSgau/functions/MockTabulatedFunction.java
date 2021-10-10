@@ -14,17 +14,17 @@ public class MockTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public double extrapolateLeft(double x) {
-        return this.y0 + (this.y1 - this.y0) * (x - this.x0) / (this.x1 - this.x0);
+        return interpolate(x, 0);
     }
 
     @Override
     public double extrapolateRight(double x) {
-        return this.y0 + (this.y1 - this.y0) * (x - this.x0) / (this.x1 - this.x0);
+        return interpolate(x, 0);
     }
 
     @Override
     public double interpolate(double x, int floorIndex) {
-        return 0;
+        return super.interpolate(x, x0, x1, y0, y1);
     }
 
     //////////////////////////////////////////////////////////
