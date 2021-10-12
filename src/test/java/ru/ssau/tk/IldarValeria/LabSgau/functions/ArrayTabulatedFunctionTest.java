@@ -101,7 +101,11 @@ public class ArrayTabulatedFunctionTest {
         Assert.assertEquals(arrayTabulatedObject.apply(2.4), -4.3999, DELTA);
         Assert.assertEquals(arrayTabulatedObject.apply(7.4), 5.6727, DELTA);
         Assert.assertEquals(arrayTabulatedObject.apply(3.7), -1.7999, DELTA);
-        Assert.assertEquals(compositeObject.apply(10), 0.8156, DELTA);
+        SqrFunction sqrObject = new SqrFunction();
+        ArrayTabulatedFunction arrayTabulated = new ArrayTabulatedFunction(sqrObject, 1, 10, 10);
+        LinkedListTabulatedFunction linkedListTabulated = new LinkedListTabulatedFunction(sqrObject, 1, 100, 10);
+        CompositeFunction compositeObject = new CompositeFunction(arrayTabulated, linkedListTabulated);
+        Assert.assertEquals(compositeObject.apply(10), 10000.0);
     }
 
     @Test
