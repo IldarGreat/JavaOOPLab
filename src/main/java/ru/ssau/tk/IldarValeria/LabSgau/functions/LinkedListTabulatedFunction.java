@@ -68,7 +68,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         Node currentNode = head;
         Node nearestNode = head.next;
         for (int element = 0; element < count; element++) {
-            if ((x > currentNode.x && x < nearestNode.x) || (Math.abs(currentNode.x - x) < 0.0001)) {
+            if ((x > currentNode.x && x < nearestNode.x) || (currentNode.x == x)) {
                 return currentNode;
             }
             nearestNode = nearestNode.next;
