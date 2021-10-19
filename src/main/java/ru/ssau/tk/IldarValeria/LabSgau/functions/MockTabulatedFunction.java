@@ -1,5 +1,7 @@
 package ru.ssau.tk.IldarValeria.LabSgau.functions;
 
+import java.util.Iterator;
+
 public class MockTabulatedFunction extends AbstractTabulatedFunction {
     public final double x0 = 1.3;
     public final double x1 = 2.8;
@@ -25,6 +27,21 @@ public class MockTabulatedFunction extends AbstractTabulatedFunction {
     @Override
     public double interpolate(double x, int floorIndex) {
         return super.interpolate(x, x0, x1, y0, y1);
+    }
+
+    @Override
+    public Iterator<Point> iterator() {
+        return new Iterator<>() {
+            @Override
+            public boolean hasNext() {
+                return false;
+            }
+
+            @Override
+            public Point next() {
+                return null;
+            }
+        };
     }
 
     //////////////////////////////////////////////////////////

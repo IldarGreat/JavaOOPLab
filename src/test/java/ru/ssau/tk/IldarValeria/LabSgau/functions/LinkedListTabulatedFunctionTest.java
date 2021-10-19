@@ -4,6 +4,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.ssau.tk.IldarValeria.LabSgau.exceptions.*;
 
+import java.util.Iterator;
+
 public class LinkedListTabulatedFunctionTest {
     private static final double DELTA = 0.0001;
     private static final double STEP = (100.0 - 1.0) / 99.0;
@@ -140,4 +142,22 @@ public class LinkedListTabulatedFunctionTest {
         Assert.assertEquals(linkedListTabulatedFunctionThree.getY(0), 1.5);
         Assert.assertEquals(linkedListTabulatedFunctionThree.getY(6), 5.0);
     }
+
+    @Test
+    public static void testIterator() {
+        Iterator<Point> iterator = linkedListTabulatedFunction.iterator();
+        int element = 0;
+        while (iterator.hasNext()) {
+            Point point = iterator.next();
+            Assert.assertEquals(point.x, linkedListTabulatedFunction.getX(element), DELTA);
+            Assert.assertEquals(point.y, linkedListTabulatedFunction.getY(element++), DELTA);
+        }
+        element = 0;
+        for (Point point : linkedListTabulatedFunction) {
+            Assert.assertEquals(point.x, linkedListTabulatedFunction.getX(element), DELTA);
+            Assert.assertEquals(point.y, linkedListTabulatedFunction.getY(element++), DELTA);
+        }
+
+    }
+
 }
