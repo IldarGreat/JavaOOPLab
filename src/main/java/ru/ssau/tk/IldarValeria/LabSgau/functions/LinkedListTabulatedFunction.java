@@ -2,7 +2,10 @@ package ru.ssau.tk.IldarValeria.LabSgau.functions;
 
 import ru.ssau.tk.IldarValeria.LabSgau.exceptions.*;
 
+import java.util.Iterator;
 import java.util.Objects;
+
+import static ru.ssau.tk.IldarValeria.LabSgau.functions.ArrayTabulatedFunction.*;
 
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     private int count = 0;
@@ -12,6 +15,8 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         if (xValues.length < 2) {
             throw new IllegalArgumentException("Length of array less than minimum length (2)");
         }
+        checkLengthIsTheSame(xValues, yValues);
+        checkSorted(xValues);
         for (int element = 0; element < xValues.length; element++) {
             addNode(xValues[element], yValues[element]);
         }
@@ -72,7 +77,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         return null;
     }
 
-    public Node floorNodeOfX(double x) throws IllegalArgumentException {
+    public Node floorNodeOfX(double x) {
         if (x < head.x) {
             throw new IllegalArgumentException("Argument x less than minimal x");
         }
@@ -119,7 +124,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     @Override
-    public double getX(int index) throws IllegalArgumentException {
+    public double getX(int index) {
         if (index < 0 || index >= count) {
             throw new IllegalArgumentException("Index is out of bounds");
         }
@@ -127,7 +132,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     @Override
-    public double getY(int index) throws IllegalArgumentException {
+    public double getY(int index) {
         if (index < 0 || index >= count) {
             throw new IllegalArgumentException("Index is out of bounds");
         }
@@ -135,7 +140,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     @Override
-    public void setY(int index, double value) throws IllegalArgumentException {
+    public void setY(int index, double value) {
         if (index < 0 || index >= count) {
             throw new IllegalArgumentException("Index is out of bounds");
         }
@@ -167,7 +172,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     @Override
-    public int floorIndexOfX(double x) throws IllegalArgumentException {
+    public int floorIndexOfX(double x) {
         if (x < head.x) {
             throw new IllegalArgumentException("Argument x less than minimal x");
         }
@@ -188,22 +193,27 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public double extrapolateLeft(double x) {
-        return interpolate(x, 0);
+        return super.interpolate(x, head.x, head.next.x, head.y, head.next.y);
     }
 
     @Override
     public double extrapolateRight(double x) {
-        return interpolate(x, count - 2);
+        return super.interpolate(x, head.prev.prev.x, head.prev.x, head.prev.prev.y, head.prev.y);
     }
 
     @Override
     public double interpolate(double x, int floorIndex) {
         Node before = getNode(floorIndex);
         Node after = Objects.requireNonNull(before).next;
-        if (x < after.x || before.x < x) {
+        if (x < before.x || x > after.x) {
             throw new InterpolationException();
         }
         return super.interpolate(x, Objects.requireNonNull(getNode(floorIndex)).x, Objects.requireNonNull(getNode(floorIndex + 1)).x, Objects.requireNonNull(getNode(floorIndex)).y, Objects.requireNonNull(getNode(floorIndex + 1)).y);
+    }
+
+    @Override
+    public Iterator<Point> iterator() {
+        throw new UnsupportedOperationException();
     }
 
     static class Node {

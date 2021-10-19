@@ -3,6 +3,7 @@ package ru.ssau.tk.IldarValeria.LabSgau.functions;
 import ru.ssau.tk.IldarValeria.LabSgau.exceptions.*;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
 public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     private final double[] xValues;
@@ -11,8 +12,10 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
         if (xValues.length < 2) {
-            throw new IllegalArgumentException("Array less than minimum length");
+            throw new IllegalArgumentException("Length of array less than minimum length (2)");
         }
+        checkLengthIsTheSame(xValues, yValues);
+        checkSorted(xValues);
         this.count = xValues.length;
         this.xValues = Arrays.copyOf(xValues, count);
         this.yValues = Arrays.copyOf(yValues, count);
@@ -20,7 +23,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     public ArrayTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
         if (count < 2) {
-            throw new IllegalArgumentException("Count less than minimum length");
+            throw new IllegalArgumentException("Count less than minimum length(2)");
         }
         double step = (xTo - xFrom) / (count - 1);
         double[] xValues = new double[count];
@@ -56,17 +59,17 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     @Override
-    public double getX(int index) throws ArrayIndexOutOfBoundsException {
+    public double getX(int index) {
         return xValues[index];
     }
 
     @Override
-    public double getY(int index) throws ArrayIndexOutOfBoundsException {
+    public double getY(int index) {
         return yValues[index];
     }
 
     @Override
-    public void setY(int index, double value) throws ArrayIndexOutOfBoundsException {
+    public void setY(int index, double value) {
         yValues[index] = value;
     }
 
@@ -121,26 +124,25 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public double extrapolateLeft(double x) {
-        if (count == 1) {
-            return yValues[0];
-        }
-        return interpolate(x, 0);
+        return super.interpolate(x, xValues[0], xValues[1], yValues[0], yValues[1]);
     }
 
     @Override
     public double extrapolateRight(double x) {
-        if (count == 1) {
-            return yValues[0];
-        }
-        return interpolate(x, count - 2);
+        return super.interpolate(x, xValues[count - 2], xValues[count - 1], yValues[count - 2], yValues[count - 1]);
     }
 
     @Override
     public double interpolate(double x, int floorIndex) {
-        if (x < xValues[floorIndex] || xValues[floorIndex + 1] < x) {
+        if (x < xValues[floorIndex] || x > xValues[floorIndex + 1]) {
             throw new InterpolationException();
         }
         return super.interpolate(x, xValues[floorIndex], xValues[floorIndex + 1], yValues[floorIndex], yValues[floorIndex + 1]);
+    }
+
+    @Override
+    public Iterator<Point> iterator(){
+        throw new UnsupportedOperationException();
     }
 
 }

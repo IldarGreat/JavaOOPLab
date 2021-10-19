@@ -16,11 +16,9 @@ public class ArrayTabulatedFunctionTest {
 
     @Test
     public static void testConstructorWithTwoParameters() {
-        double[] xValues = new double[]{3.4, 5.2, 6, 7.1, 2.3};
-        double[] yValues = new double[]{-2.4, 1.2, 3, 5.1};
-        Assert.assertThrows(DifferentLengthOfArraysException.class, () -> new ArrayTabulatedFunction(xValues, yValues));
-        double[] xValuesTwo = new double[]{3.4, 5.2, 6, 5.2};
-        Assert.assertThrows(ArrayIsNotSortedException.class, () -> new ArrayTabulatedFunction(xValuesTwo, yValues));
+        Assert.assertThrows(DifferentLengthOfArraysException.class, () -> new ArrayTabulatedFunction(new double[]{3.4, 5.2, 6, 7.1, 2.3}, yValues));
+        Assert.assertThrows(ArrayIsNotSortedException.class, () -> new ArrayTabulatedFunction(new double[]{3.4, 5.2, 6, 5.2}, yValues));
+        Assert.assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(new double[]{1.1}, new double[]{1.2, 1.3}));
     }
 
     @Test
@@ -85,7 +83,7 @@ public class ArrayTabulatedFunctionTest {
     @Test
     public static void testFloorIndexOfX() {
         Assert.assertEquals(arrayTabulatedObject.floorIndexOfX(5.5), 1);
-        Assert.assertEquals(arrayTabulatedObjectTwo.floorIndexOfX(1.1), 0);
+        Assert.assertThrows(IllegalArgumentException.class, () -> arrayTabulatedObjectTwo.floorIndexOfX(1.1));
         Assert.assertEquals(arrayTabulatedObjectTwo.floorIndexOfX(4.6), 5);
         Assert.assertEquals(arrayTabulatedObjectTwo.floorIndexOfX(67.3), 100);
     }
@@ -106,7 +104,9 @@ public class ArrayTabulatedFunctionTest {
 
     @Test
     public static void testInterpolate() {
-        Assert.assertThrows(InterpolationException.class,()->arrayTabulatedObject.interpolate(3.5,3));
+        Assert.assertEquals(arrayTabulatedObject.interpolate(4.2, 0), -0.7999, DELTA);
+        Assert.assertEquals(arrayTabulatedObject.interpolate(5.7, 1), 2.325, DELTA);
+        Assert.assertThrows(InterpolationException.class, () -> arrayTabulatedObject.interpolate(3.5, 3));
     }
 
     @Test
@@ -125,7 +125,7 @@ public class ArrayTabulatedFunctionTest {
     @Test
     public static void testSetY() {
         double[] xValues = new double[]{3.4, 5.2, 6, 7.1};
-        double[] yValues = new double[]{1.1, 2.2, 3.3, 4.4, 5.5};
+        double[] yValues = new double[]{1.1, 2.2, 3.3, 4.4};
         ArrayTabulatedFunction arrayTabulatedObjectThree = new ArrayTabulatedFunction(xValues, yValues);
         arrayTabulatedObjectThree.setY(0, 1);
         arrayTabulatedObjectThree.setY(1, 2);

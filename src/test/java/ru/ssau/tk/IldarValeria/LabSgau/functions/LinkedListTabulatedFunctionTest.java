@@ -2,9 +2,7 @@ package ru.ssau.tk.IldarValeria.LabSgau.functions;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import ru.ssau.tk.IldarValeria.LabSgau.exceptions.ArrayIsNotSortedException;
-import ru.ssau.tk.IldarValeria.LabSgau.exceptions.DifferentLengthOfArraysException;
-import ru.ssau.tk.IldarValeria.LabSgau.exceptions.InterpolationException;
+import ru.ssau.tk.IldarValeria.LabSgau.exceptions.*;
 
 public class LinkedListTabulatedFunctionTest {
     private static final double DELTA = 0.0001;
@@ -90,7 +88,6 @@ public class LinkedListTabulatedFunctionTest {
         Assert.assertEquals(linkedListTabulatedFunction.floorIndexOfX(6.76), 5);
         Assert.assertEquals(linkedListTabulatedFunction.floorIndexOfX(6.6), 5);
         Assert.assertEquals(linkedListTabulatedFunction.floorIndexOfX(13.3), 7);
-        Assert.assertEquals(linkedListTabulatedFunction.floorIndexOfX(0.1), 0);
     }
 
     @Test
@@ -115,7 +112,8 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public static void testInterpolate() {
-        Assert.assertThrows(InterpolationException.class,()->linkedListTabulatedFunction.interpolate(2.9, 2));
+        Assert.assertThrows(InterpolationException.class, () -> linkedListTabulatedFunction.interpolate(2.9, 2));
+        Assert.assertEquals(linkedListTabulatedFunction.interpolate(1.5, 0), 9.2000, DELTA);
     }
 
     @Test
@@ -123,14 +121,12 @@ public class LinkedListTabulatedFunctionTest {
         Assert.assertEquals(linkedListTabulatedFunction.floorNodeOfX(2.3).x, 2.2, DELTA);
         Assert.assertEquals(linkedListTabulatedFunction.floorNodeOfX(4.67).x, 4.4, DELTA);
         Assert.assertEquals(linkedListTabulatedFunction.floorNodeOfX(13.6).x, 7.7, DELTA);
-        Assert.assertEquals(linkedListTabulatedFunction.floorNodeOfX(0).x, 1.1, DELTA);
     }
 
     @Test
     public static void testApply() {
         Assert.assertEquals(linkedListTabulatedFunction.apply(1.1), 8.8);
         Assert.assertEquals(linkedListTabulatedFunction.apply(3.5), 11.2999, DELTA);
-        Assert.assertEquals(linkedListTabulatedFunction.apply(0.7), 8.4, DELTA);
         Assert.assertEquals(linkedListTabulatedFunction.apply(10.2), 17.9999, DELTA);
     }
 
