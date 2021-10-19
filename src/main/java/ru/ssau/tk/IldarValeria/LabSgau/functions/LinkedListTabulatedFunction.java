@@ -186,4 +186,11 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         }
         return super.interpolate(x, Objects.requireNonNull(getNode(floorIndex)).x, Objects.requireNonNull(getNode(floorIndex + 1)).x, Objects.requireNonNull(getNode(floorIndex)).y, Objects.requireNonNull(getNode(floorIndex + 1)).y);
     }
+
+    static class Node {
+        public Node next;
+        public Node prev;
+        public double x;
+        public double y;
+    }
 }
