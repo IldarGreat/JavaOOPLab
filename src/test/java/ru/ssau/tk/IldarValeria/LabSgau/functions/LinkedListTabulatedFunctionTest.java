@@ -2,6 +2,9 @@ package ru.ssau.tk.IldarValeria.LabSgau.functions;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import ru.ssau.tk.IldarValeria.LabSgau.exceptions.ArrayIsNotSortedException;
+import ru.ssau.tk.IldarValeria.LabSgau.exceptions.DifferentLengthOfArraysException;
+import ru.ssau.tk.IldarValeria.LabSgau.exceptions.InterpolationException;
 
 public class LinkedListTabulatedFunctionTest {
     private static final double DELTA = 0.0001;
@@ -11,6 +14,15 @@ public class LinkedListTabulatedFunctionTest {
     private static final LnFunction lnFunction = new LnFunction();
     private static final LinkedListTabulatedFunction linkedListTabulatedFunction = new LinkedListTabulatedFunction(x, y);
     private static final LinkedListTabulatedFunction linkedListTabulatedFunctionTwo = new LinkedListTabulatedFunction(lnFunction, 1, 100, 100);
+
+    @Test
+    public static void testConstructorWithTwoParameters() {
+        double[] x = {1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 3.2};
+        double[] y = {8.8, 9.9, 11.1, 12.2, 13.3, 14.4, 15.5};
+        Assert.assertThrows(DifferentLengthOfArraysException.class, () -> new LinkedListTabulatedFunction(x, y));
+        double[] xTwo = {1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 6.5};
+        Assert.assertThrows(ArrayIsNotSortedException.class, () -> new LinkedListTabulatedFunction(xTwo, y));
+    }
 
     @Test
     public static void testGetCount() {
@@ -103,12 +115,7 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public static void testInterpolate() {
-        Assert.assertEquals(linkedListTabulatedFunction.interpolate(2.9, 2), 10.7);
-        Assert.assertEquals(linkedListTabulatedFunction.interpolate(4.5, 3), 12.2999, DELTA);
-        Assert.assertEquals(linkedListTabulatedFunction.interpolate(6.675, 5), 14.475);
-        Assert.assertEquals(linkedListTabulatedFunction.interpolate(1.345, 0), 9.045);
-        Assert.assertEquals(linkedListTabulatedFunctionTwo.interpolate(4.5, 3), 1.4978, DELTA);
-        Assert.assertEquals(linkedListTabulatedFunctionTwo.interpolate(15.3, 17), 2.7443, DELTA);
+        Assert.assertThrows(InterpolationException.class,()->linkedListTabulatedFunction.interpolate(2.9, 2));
     }
 
     @Test

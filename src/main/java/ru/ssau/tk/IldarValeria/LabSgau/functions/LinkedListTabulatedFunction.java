@@ -1,12 +1,18 @@
 package ru.ssau.tk.IldarValeria.LabSgau.functions;
 
+import ru.ssau.tk.IldarValeria.LabSgau.exceptions.InterpolationException;
+
 import java.util.Objects;
+
+import static ru.ssau.tk.IldarValeria.LabSgau.functions.ArrayTabulatedFunction.*;
 
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     private int count = 0;
     private Node head;
 
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
+        checkLengthIsTheSame(xValues,yValues);
+        checkSorted(xValues);
         for (int element = 0; element < xValues.length; element++) {
             addNode(xValues[element], yValues[element]);
         }
@@ -181,6 +187,11 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public double interpolate(double x, int floorIndex) {
+        Node before = getNode(floorIndex);
+        Node after = Objects.requireNonNull(before).next;
+        if (x < after.x || before.x < x) {
+            throw new InterpolationException();
+        }
         if (count == 1) {
             return Objects.requireNonNull(getNode(0)).y;
         }

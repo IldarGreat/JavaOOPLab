@@ -1,5 +1,7 @@
 package ru.ssau.tk.IldarValeria.LabSgau.functions;
 
+import ru.ssau.tk.IldarValeria.LabSgau.exceptions.*;
+
 import java.util.Arrays;
 
 public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
@@ -8,6 +10,8 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     private final int count;
 
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
+        checkLengthIsTheSame(xValues,yValues);
+        checkSorted(xValues);
         this.count = xValues.length;
         this.xValues = Arrays.copyOf(xValues, count);
         this.yValues = Arrays.copyOf(yValues, count);
@@ -26,6 +30,20 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
         this.count = count;
         this.xValues = Arrays.copyOf(xValues, count);
         this.yValues = Arrays.copyOf(yValues, count);
+    }
+
+    public static void checkLengthIsTheSame(double[] xValues, double[] yValues) {
+        if (xValues.length != yValues.length) {
+            throw new DifferentLengthOfArraysException();
+        }
+    }
+
+    public static void checkSorted(double[] xValues) {
+        for (int element = 1; element < xValues.length; element++) {
+            if (xValues[element - 1] > xValues[element]) {
+                throw new ArrayIsNotSortedException();
+            }
+        }
     }
 
     @Override
@@ -112,6 +130,9 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public double interpolate(double x, int floorIndex) {
+        if (x < xValues[floorIndex] || xValues[floorIndex + 1] < x) {
+            throw new InterpolationException();
+        }
         if (count == 1) {
             return yValues[0];
         }

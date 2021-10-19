@@ -2,6 +2,7 @@ package ru.ssau.tk.IldarValeria.LabSgau.functions;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import ru.ssau.tk.IldarValeria.LabSgau.exceptions.*;
 
 public class ArrayTabulatedFunctionTest {
     private static final double DELTA = 0.0001;
@@ -11,8 +12,16 @@ public class ArrayTabulatedFunctionTest {
     private static final LnFunction lnObject = new LnFunction();
     private static final ArrayTabulatedFunction arrayTabulatedObject = new ArrayTabulatedFunction(xValues, yValues);
     private static final ArrayTabulatedFunction arrayTabulatedObjectTwo = new ArrayTabulatedFunction(lnObject, 1.2, 67.2, 100);
-    private static final LinkedListTabulatedFunction linkedListTabulatedFunctionTwo = new LinkedListTabulatedFunction(lnObject, 1, 100, 100);
-    private static final CompositeFunction compositeObject = new CompositeFunction(arrayTabulatedObjectTwo, linkedListTabulatedFunctionTwo);
+
+
+    @Test
+    public static void testConstructorWithTwoParameters() {
+        double[] xValues = new double[]{3.4, 5.2, 6, 7.1, 2.3};
+        double[] yValues = new double[]{-2.4, 1.2, 3, 5.1};
+        Assert.assertThrows(DifferentLengthOfArraysException.class, () -> new ArrayTabulatedFunction(xValues, yValues));
+        double[] xValuesTwo = new double[]{3.4, 5.2, 6, 5.2};
+        Assert.assertThrows(ArrayIsNotSortedException.class, () -> new ArrayTabulatedFunction(xValuesTwo, yValues));
+    }
 
     @Test
     public static void testGetCount() {
@@ -96,6 +105,11 @@ public class ArrayTabulatedFunctionTest {
     }
 
     @Test
+    public static void testInterpolate() {
+        Assert.assertThrows(InterpolationException.class,()->arrayTabulatedObject.interpolate(3.5,3));
+    }
+
+    @Test
     public static void testApply() {
         Assert.assertEquals(arrayTabulatedObject.apply(3.4), -2.4);
         Assert.assertEquals(arrayTabulatedObject.apply(2.4), -4.3999, DELTA);
@@ -117,5 +131,15 @@ public class ArrayTabulatedFunctionTest {
         arrayTabulatedObjectThree.setY(1, 2);
         Assert.assertEquals(arrayTabulatedObjectThree.getY(0), 1.0);
         Assert.assertEquals(arrayTabulatedObjectThree.getY(1), 2.0);
+    }
+
+    @Test
+    public static void testCheckLengthIsTheSame() {
+        Assert.assertThrows(DifferentLengthOfArraysException.class, () -> ArrayTabulatedFunction.checkLengthIsTheSame(new double[4], new double[5]));
+    }
+
+    @Test
+    public static void testCheckSorted() {
+        Assert.assertThrows(ArrayIsNotSortedException.class, () -> ArrayTabulatedFunction.checkSorted(new double[]{2.3, 4.5, 2.3}));
     }
 }
