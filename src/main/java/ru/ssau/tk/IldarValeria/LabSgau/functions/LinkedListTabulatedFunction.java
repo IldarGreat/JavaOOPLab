@@ -1,24 +1,26 @@
 package ru.ssau.tk.IldarValeria.LabSgau.functions;
 
-import ru.ssau.tk.IldarValeria.LabSgau.exceptions.InterpolationException;
+import ru.ssau.tk.IldarValeria.LabSgau.exceptions.*;
 
 import java.util.Objects;
-
-import static ru.ssau.tk.IldarValeria.LabSgau.functions.ArrayTabulatedFunction.*;
 
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     private int count = 0;
     private Node head;
 
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
-        checkLengthIsTheSame(xValues,yValues);
-        checkSorted(xValues);
+        if (xValues.length < 2) {
+            throw new IllegalArgumentException("Length of array less than minimum length (2)");
+        }
         for (int element = 0; element < xValues.length; element++) {
             addNode(xValues[element], yValues[element]);
         }
     }
 
     public LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
+        if (count < 2) {
+            throw new IllegalArgumentException("The count of points is less than the minimum count (2)");
+        }
         double step = (xTo - xFrom) / (count - 1);
         for (int element = 0; element < count; element++) {
             addNode(xFrom + element * step, source.apply(xFrom + element * step));
@@ -70,7 +72,10 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         return null;
     }
 
-    public Node floorNodeOfX(double x) {
+    public Node floorNodeOfX(double x) throws IllegalArgumentException {
+        if (x < head.x) {
+            throw new IllegalArgumentException("Argument x less than minimal x");
+        }
         Node currentNode = head;
         Node nearestNode = head.next;
         for (int element = 0; element < count; element++) {
@@ -114,17 +119,26 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     @Override
-    public double getX(int index) {
+    public double getX(int index) throws IllegalArgumentException {
+        if (index < 0 || index >= count) {
+            throw new IllegalArgumentException("Index is out of bounds");
+        }
         return Objects.requireNonNull(getNode(index)).x;
     }
 
     @Override
-    public double getY(int index) {
+    public double getY(int index) throws IllegalArgumentException {
+        if (index < 0 || index >= count) {
+            throw new IllegalArgumentException("Index is out of bounds");
+        }
         return Objects.requireNonNull(getNode(index)).y;
     }
 
     @Override
-    public void setY(int index, double value) {
+    public void setY(int index, double value) throws IllegalArgumentException {
+        if (index < 0 || index >= count) {
+            throw new IllegalArgumentException("Index is out of bounds");
+        }
         Objects.requireNonNull(getNode(index)).y = value;
     }
 
@@ -153,7 +167,10 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     @Override
-    public int floorIndexOfX(double x) {
+    public int floorIndexOfX(double x) throws IllegalArgumentException {
+        if (x < head.x) {
+            throw new IllegalArgumentException("Argument x less than minimal x");
+        }
         Node currentNode = head;
         Node nearestNode = head.next;
         for (int element = 0; element < count; element++) {
@@ -171,17 +188,11 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public double extrapolateLeft(double x) {
-        if (count == 1) {
-            return Objects.requireNonNull(getNode(0)).y;
-        }
         return interpolate(x, 0);
     }
 
     @Override
     public double extrapolateRight(double x) {
-        if (count == 1) {
-            return Objects.requireNonNull(getNode(0)).y;
-        }
         return interpolate(x, count - 2);
     }
 
@@ -191,9 +202,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         Node after = Objects.requireNonNull(before).next;
         if (x < after.x || before.x < x) {
             throw new InterpolationException();
-        }
-        if (count == 1) {
-            return Objects.requireNonNull(getNode(0)).y;
         }
         return super.interpolate(x, Objects.requireNonNull(getNode(floorIndex)).x, Objects.requireNonNull(getNode(floorIndex + 1)).x, Objects.requireNonNull(getNode(floorIndex)).y, Objects.requireNonNull(getNode(floorIndex + 1)).y);
     }

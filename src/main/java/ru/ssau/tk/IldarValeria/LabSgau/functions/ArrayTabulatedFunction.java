@@ -10,14 +10,18 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     private final int count;
 
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
-        checkLengthIsTheSame(xValues,yValues);
-        checkSorted(xValues);
+        if (xValues.length < 2) {
+            throw new IllegalArgumentException("Array less than minimum length");
+        }
         this.count = xValues.length;
         this.xValues = Arrays.copyOf(xValues, count);
         this.yValues = Arrays.copyOf(yValues, count);
     }
 
     public ArrayTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
+        if (count < 2) {
+            throw new IllegalArgumentException("Count less than minimum length");
+        }
         double step = (xTo - xFrom) / (count - 1);
         double[] xValues = new double[count];
         double[] yValues = new double[count];
@@ -52,17 +56,17 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     @Override
-    public double getX(int index) {
+    public double getX(int index) throws ArrayIndexOutOfBoundsException {
         return xValues[index];
     }
 
     @Override
-    public double getY(int index) {
+    public double getY(int index) throws ArrayIndexOutOfBoundsException {
         return yValues[index];
     }
 
     @Override
-    public void setY(int index, double value) {
+    public void setY(int index, double value) throws ArrayIndexOutOfBoundsException {
         yValues[index] = value;
     }
 
@@ -98,6 +102,9 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public int floorIndexOfX(double x) {
+        if (x < xValues[0]) {
+            throw new IllegalArgumentException("Argument x less than minimal x in tabulated function");
+        }
         if (indexOfX(x) != -1) {
             return indexOfX(x);
         }
@@ -132,9 +139,6 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     public double interpolate(double x, int floorIndex) {
         if (x < xValues[floorIndex] || xValues[floorIndex + 1] < x) {
             throw new InterpolationException();
-        }
-        if (count == 1) {
-            return yValues[0];
         }
         return super.interpolate(x, xValues[floorIndex], xValues[floorIndex + 1], yValues[floorIndex], yValues[floorIndex + 1]);
     }
