@@ -4,6 +4,7 @@ import ru.ssau.tk.IldarValeria.LabSgau.exceptions.*;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     private final double[] xValues;
@@ -141,8 +142,23 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     @Override
-    public Iterator<Point> iterator(){
-        throw new UnsupportedOperationException();
+    public Iterator<Point> iterator() {
+        return new Iterator<>() {
+            int index = 0;
+
+            @Override
+            public boolean hasNext() {
+                return index < count;
+            }
+
+            @Override
+            public Point next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                return new Point(xValues[index], yValues[index++]);
+            }
+        };
     }
 
 }

@@ -4,6 +4,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.ssau.tk.IldarValeria.LabSgau.exceptions.*;
 
+import java.util.Iterator;
+
 public class ArrayTabulatedFunctionTest {
     private static final double DELTA = 0.0001;
     private static final double STEP = (67.2 - 1.2) / 99.0;
@@ -141,5 +143,22 @@ public class ArrayTabulatedFunctionTest {
     @Test
     public static void testCheckSorted() {
         Assert.assertThrows(ArrayIsNotSortedException.class, () -> ArrayTabulatedFunction.checkSorted(new double[]{2.3, 4.5, 2.3}));
+    }
+
+    @Test
+    public static void testIterator() {
+        Iterator<Point> iterator = arrayTabulatedObject.iterator();
+        int element = 0;
+        while (iterator.hasNext()) {
+            Point point = iterator.next();
+            Assert.assertEquals(point.x, arrayTabulatedObject.getX(element), DELTA);
+            Assert.assertEquals(point.y, arrayTabulatedObject.getY(element++), DELTA);
+        }
+        element = 0;
+        for (Point point : arrayTabulatedObject) {
+            Assert.assertEquals(point.x, arrayTabulatedObject.getX(element), DELTA);
+            Assert.assertEquals(point.y, arrayTabulatedObject.getY(element++), DELTA);
+        }
+
     }
 }
