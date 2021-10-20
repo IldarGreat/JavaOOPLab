@@ -2,10 +2,10 @@ package ru.ssau.tk.IldarValeria.LabSgau.functions;
 
 import java.util.Iterator;
 
-public class StrictTabulatedFunction implements TabulatedFunction {
+public class UnmodifiableTabulatedFunction implements TabulatedFunction {
     private final TabulatedFunction function;
 
-    public StrictTabulatedFunction(TabulatedFunction function) {
+    public UnmodifiableTabulatedFunction(TabulatedFunction function) {
         this.function = function;
     }
 
@@ -26,7 +26,7 @@ public class StrictTabulatedFunction implements TabulatedFunction {
 
     @Override
     public void setY(int index, double value) {
-        function.setY(index, value);
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -56,10 +56,7 @@ public class StrictTabulatedFunction implements TabulatedFunction {
 
     @Override
     public double apply(double x) {
-        if (function.indexOfX(x) == -1) {
-            throw new UnsupportedOperationException();
-        } else {
-            return function.apply(x);
-        }
+        return function.apply(x);
     }
+
 }
