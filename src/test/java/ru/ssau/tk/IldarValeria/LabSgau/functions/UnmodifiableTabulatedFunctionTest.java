@@ -88,8 +88,8 @@ public class UnmodifiableTabulatedFunctionTest {
 
     @Test
     public static void testSetY() {
-        Assert.assertThrows(UnsupportedOperationException.class,()->unmodifiableArrayTabulated.setY(2,2));
-        Assert.assertThrows(UnsupportedOperationException.class,()->unmodifiableListTabulated.setY(2,2));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> unmodifiableArrayTabulated.setY(2, 2));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> unmodifiableListTabulated.setY(2, 2));
     }
 
 
