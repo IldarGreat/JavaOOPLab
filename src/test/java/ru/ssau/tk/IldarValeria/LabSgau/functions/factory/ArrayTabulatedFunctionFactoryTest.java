@@ -31,4 +31,14 @@ public class ArrayTabulatedFunctionFactoryTest {
         TabulatedFunction arrayUnmodifiableTabulatedFunctionFactory = arrayTabulatedFunctionFactory.createUnmodifiable(xValues, yValues);
         Assert.assertThrows(UnsupportedOperationException.class, () -> arrayUnmodifiableTabulatedFunctionFactory.setY(0,1));
     }
+
+    @Test
+    public static void testCreateStrictUnmodifiable() {
+        double[] xValues = new double[]{1, 2, 3, 4, 5};
+        double[] yValues = new double[]{6, 7, 8, 9, 10};
+        ArrayTabulatedFunctionFactory arrayTabulatedFunctionFactory = new ArrayTabulatedFunctionFactory();
+        TabulatedFunction arrayStrictAndUnmodifiableTabulatedFunctionFactory = arrayTabulatedFunctionFactory.createStrictUnmodifiable(xValues, yValues);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> arrayStrictAndUnmodifiableTabulatedFunctionFactory.setY(0,1));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> arrayStrictAndUnmodifiableTabulatedFunctionFactory.apply(2.5));
+    }
 }
