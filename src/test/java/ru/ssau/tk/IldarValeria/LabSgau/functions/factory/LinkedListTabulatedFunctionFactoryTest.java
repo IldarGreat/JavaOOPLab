@@ -23,4 +23,12 @@ public class LinkedListTabulatedFunctionFactoryTest {
         Assert.assertThrows(UnsupportedOperationException.class, () -> linkedStrictTabulatedFunctionFactory.apply(2.5));
     }
 
+    @Test
+    public static void testCreateUnmodifiable() {
+        double[] xValues = new double[]{1, 2, 3, 4, 5};
+        double[] yValues = new double[]{6, 7, 8, 9, 10};
+        LinkedListTabulatedFunctionFactory linkedTabulatedFunctionFactory = new LinkedListTabulatedFunctionFactory();
+        TabulatedFunction linkedUnmodifiableTabulatedFunctionFactory = linkedTabulatedFunctionFactory.createUnmodifiable(xValues, yValues);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> linkedUnmodifiableTabulatedFunctionFactory.setY(0, 1));
+    }
 }
