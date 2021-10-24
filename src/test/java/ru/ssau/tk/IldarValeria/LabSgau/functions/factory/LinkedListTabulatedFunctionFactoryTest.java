@@ -14,4 +14,13 @@ public class LinkedListTabulatedFunctionFactoryTest {
         Assert.assertTrue(linkedTabulatedFunctionFactory.create(xValues, yValues) instanceof LinkedListTabulatedFunction);
     }
 
+    @Test
+    public static void testCreateStrict() {
+        double[] xValues = new double[]{1, 2, 3, 4, 5};
+        double[] yValues = new double[]{6, 7, 8, 9, 10};
+        LinkedListTabulatedFunctionFactory linkedTabulatedFunctionFactory = new LinkedListTabulatedFunctionFactory();
+        TabulatedFunction linkedStrictTabulatedFunctionFactory = linkedTabulatedFunctionFactory.createStrict(xValues, yValues);
+        Assert.assertThrows(UnsupportedOperationException.class, () -> linkedStrictTabulatedFunctionFactory.apply(2.5));
+    }
+
 }
