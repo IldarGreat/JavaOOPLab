@@ -2,10 +2,9 @@ package ru.ssau.tk.IldarValeria.LabSgau.operations;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import ru.ssau.tk.IldarValeria.LabSgau.exceptions.InconsistentFunctionsException;
+import ru.ssau.tk.IldarValeria.LabSgau.exceptions.*;
 import ru.ssau.tk.IldarValeria.LabSgau.functions.*;
-import ru.ssau.tk.IldarValeria.LabSgau.functions.factory.ArrayTabulatedFunctionFactory;
-import ru.ssau.tk.IldarValeria.LabSgau.functions.factory.LinkedListTabulatedFunctionFactory;
+import ru.ssau.tk.IldarValeria.LabSgau.functions.factory.*;
 
 public class TabulatedFunctionOperationServiceTest {
 
@@ -67,6 +66,34 @@ public class TabulatedFunctionOperationServiceTest {
         }
         Assert.assertThrows(InconsistentFunctionsException.class, () -> service.subtraction(arrayFactory.create(new double[]{1, 1, 1}, new double[]{1, 2, 3}), linkedFactory.create(new double[]{1, 1, 3}, new double[]{-1, -2, -3})));
         Assert.assertThrows(InconsistentFunctionsException.class, () -> service.subtraction(arrayFactory.create(new double[]{1, 1, 1, 1}, new double[]{1, 2, 3, 4}), linkedFactory.create(new double[]{1, 1, 1}, new double[]{-1, -2, -3})));
+    }
+
+    @Test
+    public static void testMultiplication() {
+        TabulatedFunctionOperationService service = new TabulatedFunctionOperationService();
+        ArrayTabulatedFunctionFactory arrayFactory = new ArrayTabulatedFunctionFactory();
+        LinkedListTabulatedFunctionFactory linkedFactory = new LinkedListTabulatedFunctionFactory();
+        TabulatedFunction result = service.multiplication(arrayFactory.create(new double[]{5, 5, 5}, new double[]{1, 2, 3}), linkedFactory.create(new double[]{5, 5, 5}, new double[]{0, 0, 0}));
+        for (Point point : result) {
+            Assert.assertEquals(point.x, 5.0);
+            Assert.assertEquals(point.y, 0.0);
+        }
+        Assert.assertThrows(InconsistentFunctionsException.class, () -> service.multiplication(arrayFactory.create(new double[]{1, 1, 1}, new double[]{1, 2, 3}), linkedFactory.create(new double[]{1, 1, 3}, new double[]{-1, -2, -3})));
+        Assert.assertThrows(InconsistentFunctionsException.class, () -> service.multiplication(arrayFactory.create(new double[]{1, 1, 1, 1}, new double[]{1, 2, 3, 4}), linkedFactory.create(new double[]{1, 1, 1}, new double[]{-1, -2, -3})));
+    }
+
+    @Test
+    public static void testDivide() {
+        TabulatedFunctionOperationService service = new TabulatedFunctionOperationService();
+        ArrayTabulatedFunctionFactory arrayFactory = new ArrayTabulatedFunctionFactory();
+        LinkedListTabulatedFunctionFactory linkedFactory = new LinkedListTabulatedFunctionFactory();
+        TabulatedFunction result = service.divide(arrayFactory.create(new double[]{1, 1, 1}, new double[]{1, 2, 3}), linkedFactory.create(new double[]{1, 1, 1}, new double[]{-1, -2, -3}));
+        for (Point point : result) {
+            Assert.assertEquals(point.x, 1.0);
+            Assert.assertEquals(point.y, -1.0);
+        }
+        Assert.assertThrows(InconsistentFunctionsException.class, () -> service.divide(arrayFactory.create(new double[]{1, 1, 1}, new double[]{1, 2, 3}), linkedFactory.create(new double[]{1, 1, 3}, new double[]{-1, -2, -3})));
+        Assert.assertThrows(InconsistentFunctionsException.class, () -> service.divide(arrayFactory.create(new double[]{1, 1, 1, 1}, new double[]{1, 2, 3, 4}), linkedFactory.create(new double[]{1, 1, 1}, new double[]{-1, -2, -3})));
     }
 
 }

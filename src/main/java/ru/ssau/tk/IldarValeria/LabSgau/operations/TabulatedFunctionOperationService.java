@@ -59,8 +59,16 @@ public class TabulatedFunctionOperationService {
         return doOperation(firstFunction, secondFunction, Double::sum);
     }
 
+    public TabulatedFunction multiplication(TabulatedFunction firstFunction, TabulatedFunction secondFunction) {
+        return doOperation(firstFunction, secondFunction, (first, second) -> first * second);
+    }
+
     public TabulatedFunction subtraction(TabulatedFunction firstFunction, TabulatedFunction secondFunction) {
         return doOperation(firstFunction, secondFunction, (first, second) -> first - second);
+    }
+
+    public TabulatedFunction divide(TabulatedFunction firstFunction, TabulatedFunction secondFunction) {
+        return doOperation(firstFunction, secondFunction, (first, second) -> first / second);
     }
 
 }
