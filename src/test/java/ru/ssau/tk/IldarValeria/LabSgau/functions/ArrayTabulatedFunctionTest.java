@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import ru.ssau.tk.IldarValeria.LabSgau.exceptions.*;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class ArrayTabulatedFunctionTest {
     private static final double DELTA = 0.0001;
@@ -138,11 +139,13 @@ public class ArrayTabulatedFunctionTest {
     @Test
     public static void testCheckLengthIsTheSame() {
         Assert.assertThrows(DifferentLengthOfArraysException.class, () -> ArrayTabulatedFunction.checkLengthIsTheSame(new double[4], new double[5]));
+        ArrayTabulatedFunction.checkLengthIsTheSame(new double[5], new double[5]);
     }
 
     @Test
     public static void testCheckSorted() {
         Assert.assertThrows(ArrayIsNotSortedException.class, () -> ArrayTabulatedFunction.checkSorted(new double[]{2.3, 4.5, 2.3}));
+        ArrayTabulatedFunction.checkSorted(new double[]{2.3, 4.5, 6.7});
     }
 
     @Test
@@ -154,11 +157,13 @@ public class ArrayTabulatedFunctionTest {
             Assert.assertEquals(point.x, arrayTabulatedObject.getX(element), DELTA);
             Assert.assertEquals(point.y, arrayTabulatedObject.getY(element++), DELTA);
         }
+        Assert.assertThrows(NoSuchElementException.class, iterator::next);
+        Assert.assertEquals(element, arrayTabulatedObject.getCount());
         element = 0;
         for (Point point : arrayTabulatedObject) {
             Assert.assertEquals(point.x, arrayTabulatedObject.getX(element), DELTA);
             Assert.assertEquals(point.y, arrayTabulatedObject.getY(element++), DELTA);
         }
-
+        Assert.assertEquals(element, arrayTabulatedObject.getCount());
     }
 }

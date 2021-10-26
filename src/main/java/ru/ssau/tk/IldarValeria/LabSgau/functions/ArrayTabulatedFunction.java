@@ -40,20 +40,6 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
         this.yValues = Arrays.copyOf(yValues, count);
     }
 
-    public static void checkLengthIsTheSame(double[] xValues, double[] yValues) {
-        if (xValues.length != yValues.length) {
-            throw new DifferentLengthOfArraysException();
-        }
-    }
-
-    public static void checkSorted(double[] xValues) {
-        for (int element = 1; element < xValues.length; element++) {
-            if (xValues[element - 1] > xValues[element]) {
-                throw new ArrayIsNotSortedException();
-            }
-        }
-    }
-
     @Override
     public int getCount() {
         return this.count;

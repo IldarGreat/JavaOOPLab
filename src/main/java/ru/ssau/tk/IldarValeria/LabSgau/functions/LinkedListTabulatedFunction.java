@@ -6,8 +6,6 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-import static ru.ssau.tk.IldarValeria.LabSgau.functions.ArrayTabulatedFunction.*;
-
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     private int count = 0;
     private Node head;
@@ -52,6 +50,9 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     private Node getNode(int index) {
+        if (index < 0 || index > count) {
+            throw new IndexOutOfBoundsException();
+        }
         if (index == count) {
             return null;
         }
@@ -239,7 +240,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         };
     }
 
-    static class Node {
+    protected static class Node {
         public Node next;
         public Node prev;
         public double x;

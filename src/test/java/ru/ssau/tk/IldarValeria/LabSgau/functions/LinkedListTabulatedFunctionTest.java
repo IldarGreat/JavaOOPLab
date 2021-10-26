@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import ru.ssau.tk.IldarValeria.LabSgau.exceptions.*;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class LinkedListTabulatedFunctionTest {
     private static final double DELTA = 0.0001;
@@ -22,6 +23,7 @@ public class LinkedListTabulatedFunctionTest {
         Assert.assertThrows(DifferentLengthOfArraysException.class, () -> new LinkedListTabulatedFunction(x, y));
         double[] xTwo = {1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 6.5};
         Assert.assertThrows(ArrayIsNotSortedException.class, () -> new LinkedListTabulatedFunction(xTwo, y));
+        Assert.assertThrows(IllegalArgumentException.class, () -> new LinkedListTabulatedFunction(new double[]{1}, new double[]{1}));
     }
 
     @Test
@@ -50,6 +52,7 @@ public class LinkedListTabulatedFunctionTest {
         for (int element = 0; element < 100; element++) {
             Assert.assertEquals(linkedListTabulatedFunctionTwo.getX(element), 1 + STEP * element, DELTA);
         }
+        Assert.assertThrows(IllegalArgumentException.class, () -> linkedListTabulatedFunction.getX(15));
     }
 
     @Test
@@ -60,6 +63,7 @@ public class LinkedListTabulatedFunctionTest {
         for (int element = 0; element < 100; element++) {
             Assert.assertEquals(linkedListTabulatedFunctionTwo.getY(element), lnFunction.apply(1 + STEP * element), DELTA);
         }
+        Assert.assertThrows(IllegalArgumentException.class, () -> linkedListTabulatedFunction.getY(15));
     }
 
     @Test
@@ -116,6 +120,7 @@ public class LinkedListTabulatedFunctionTest {
     public static void testInterpolate() {
         Assert.assertThrows(InterpolationException.class, () -> linkedListTabulatedFunction.interpolate(2.9, 2));
         Assert.assertEquals(linkedListTabulatedFunction.interpolate(1.5, 0), 9.2000, DELTA);
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> linkedListTabulatedFunction.interpolate(15, 15));
     }
 
     @Test
@@ -144,6 +149,18 @@ public class LinkedListTabulatedFunctionTest {
     }
 
     @Test
+    public static void testCheckLengthIsTheSame() {
+        Assert.assertThrows(DifferentLengthOfArraysException.class, () -> LinkedListTabulatedFunction.checkLengthIsTheSame(new double[4], new double[5]));
+        LinkedListTabulatedFunction.checkLengthIsTheSame(new double[5], new double[5]);
+    }
+
+    @Test
+    public static void testCheckSorted() {
+        Assert.assertThrows(ArrayIsNotSortedException.class, () -> LinkedListTabulatedFunction.checkSorted(new double[]{2.3, 4.5, 2.3}));
+        LinkedListTabulatedFunction.checkSorted(new double[]{2.3, 4.5, 6.7});
+    }
+
+    @Test
     public static void testIterator() {
         Iterator<Point> iterator = linkedListTabulatedFunction.iterator();
         int element = 0;
@@ -152,6 +169,8 @@ public class LinkedListTabulatedFunctionTest {
             Assert.assertEquals(point.x, linkedListTabulatedFunction.getX(element), DELTA);
             Assert.assertEquals(point.y, linkedListTabulatedFunction.getY(element++), DELTA);
         }
+        Assert.assertEquals(element, linkedListTabulatedFunction.getCount());
+        Assert.assertThrows(NoSuchElementException.class, iterator::next);
         element = 0;
         for (Point point : linkedListTabulatedFunction) {
             Assert.assertEquals(point.x, linkedListTabulatedFunction.getX(element), DELTA);
