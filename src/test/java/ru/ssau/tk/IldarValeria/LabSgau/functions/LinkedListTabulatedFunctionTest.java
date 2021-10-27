@@ -24,6 +24,7 @@ public class LinkedListTabulatedFunctionTest {
         double[] xTwo = {1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 6.5};
         Assert.assertThrows(ArrayIsNotSortedException.class, () -> new LinkedListTabulatedFunction(xTwo, y));
         Assert.assertThrows(IllegalArgumentException.class, () -> new LinkedListTabulatedFunction(new double[]{1}, new double[]{1}));
+        Assert.assertThrows(IllegalArgumentException.class, () -> new LinkedListTabulatedFunction(lnFunction, 1, 100, 1));
     }
 
     @Test
@@ -158,6 +159,7 @@ public class LinkedListTabulatedFunctionTest {
     public static void testCheckSorted() {
         Assert.assertThrows(ArrayIsNotSortedException.class, () -> LinkedListTabulatedFunction.checkSorted(new double[]{2.3, 4.5, 2.3}));
         LinkedListTabulatedFunction.checkSorted(new double[]{2.3, 4.5, 6.7});
+        Assert.assertThrows(ArrayIsNotSortedException.class, () -> LinkedListTabulatedFunction.checkSorted(new double[]{2.3, 4.5, 4.5}));
     }
 
     @Test
@@ -176,7 +178,7 @@ public class LinkedListTabulatedFunctionTest {
             Assert.assertEquals(point.x, linkedListTabulatedFunction.getX(element), DELTA);
             Assert.assertEquals(point.y, linkedListTabulatedFunction.getY(element++), DELTA);
         }
-
+        Assert.assertEquals(element, linkedListTabulatedFunction.getCount());
     }
 
 }

@@ -23,7 +23,7 @@ public abstract class AbstractTabulatedFunction implements TabulatedFunction {
 
     protected static void checkSorted(double[] xValues) {
         for (int element = 1; element < xValues.length; element++) {
-            if (xValues[element - 1] > xValues[element]) {
+            if (xValues[element - 1] >= xValues[element]) {
                 throw new ArrayIsNotSortedException();
             }
         }

@@ -50,11 +50,8 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     private Node getNode(int index) {
-        if (index < 0 || index > count) {
+        if (index < 0 || index >= count) {
             throw new IndexOutOfBoundsException();
-        }
-        if (index == count) {
-            return null;
         }
         Node indexNode;
         if (index < (double) count / 2) {

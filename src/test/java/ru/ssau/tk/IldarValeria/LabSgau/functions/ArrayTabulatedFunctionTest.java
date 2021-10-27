@@ -18,10 +18,12 @@ public class ArrayTabulatedFunctionTest {
 
 
     @Test
-    public static void testConstructorWithTwoParameters() {
+    public static void testConstructors() {
         Assert.assertThrows(DifferentLengthOfArraysException.class, () -> new ArrayTabulatedFunction(new double[]{3.4, 5.2, 6, 7.1, 2.3}, yValues));
         Assert.assertThrows(ArrayIsNotSortedException.class, () -> new ArrayTabulatedFunction(new double[]{3.4, 5.2, 6, 5.2}, yValues));
         Assert.assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(new double[]{1.1}, new double[]{1.2, 1.3}));
+        Assert.assertThrows(IllegalArgumentException.class,()->new ArrayTabulatedFunction(lnObject, 1.2, 67.2, 1));
+
     }
 
     @Test
@@ -146,6 +148,7 @@ public class ArrayTabulatedFunctionTest {
     public static void testCheckSorted() {
         Assert.assertThrows(ArrayIsNotSortedException.class, () -> ArrayTabulatedFunction.checkSorted(new double[]{2.3, 4.5, 2.3}));
         ArrayTabulatedFunction.checkSorted(new double[]{2.3, 4.5, 6.7});
+        Assert.assertThrows(ArrayIsNotSortedException.class, () -> ArrayTabulatedFunction.checkSorted(new double[]{2.3, 4.5, 4.5}));
     }
 
     @Test
