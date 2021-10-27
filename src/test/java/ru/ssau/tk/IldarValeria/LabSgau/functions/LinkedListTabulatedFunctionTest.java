@@ -95,6 +95,7 @@ public class LinkedListTabulatedFunctionTest {
         Assert.assertEquals(linkedListTabulatedFunction.floorIndexOfX(6.76), 5);
         Assert.assertEquals(linkedListTabulatedFunction.floorIndexOfX(6.6), 5);
         Assert.assertEquals(linkedListTabulatedFunction.floorIndexOfX(13.3), 7);
+        Assert.assertThrows(IllegalArgumentException.class, () -> linkedListTabulatedFunction.floorIndexOfX(1));
     }
 
     @Test
@@ -136,6 +137,7 @@ public class LinkedListTabulatedFunctionTest {
         Assert.assertEquals(linkedListTabulatedFunction.apply(1.1), 8.8);
         Assert.assertEquals(linkedListTabulatedFunction.apply(3.5), 11.2999, DELTA);
         Assert.assertEquals(linkedListTabulatedFunction.apply(10.2), 17.9999, DELTA);
+        Assert.assertEquals(linkedListTabulatedFunction.apply(0.5), 8.2, DELTA);
     }
 
     @Test
@@ -147,6 +149,7 @@ public class LinkedListTabulatedFunctionTest {
         linkedListTabulatedFunctionThree.setY(6, 5);
         Assert.assertEquals(linkedListTabulatedFunctionThree.getY(0), 1.5);
         Assert.assertEquals(linkedListTabulatedFunctionThree.getY(6), 5.0);
+        Assert.assertThrows(IllegalArgumentException.class, () -> linkedListTabulatedFunctionThree.setY(8, 8));
     }
 
     @Test

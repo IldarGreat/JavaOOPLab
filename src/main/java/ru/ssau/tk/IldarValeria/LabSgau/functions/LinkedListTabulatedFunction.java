@@ -73,7 +73,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
                 }
             }
         }
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     public Node floorNodeOfX(double x) {
