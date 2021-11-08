@@ -169,4 +169,9 @@ public class ArrayTabulatedFunctionTest {
         }
         Assert.assertEquals(element, arrayTabulatedObject.getCount());
     }
+
+    @Test
+    public static void testToString(){
+        Assert.assertEquals(arrayTabulatedObject.toString(),"ArrayTabulatedFunction size =4\n[3.4;-2.4]\n[5.2;1.2]\n[6.0;3.0]\n[7.1;5.1]");
+    }
 }

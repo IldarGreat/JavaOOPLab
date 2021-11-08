@@ -184,4 +184,9 @@ public class LinkedListTabulatedFunctionTest {
         Assert.assertEquals(element, linkedListTabulatedFunction.getCount());
     }
 
+    @Test
+    public static void testToString() {
+        Assert.assertEquals(linkedListTabulatedFunction.toString(), "LinkedListTabulatedFunction size =7\n[1.1;8.8]\n[2.2;9.9]\n[3.3;11.1]\n[4.4;12.2]\n[5.5;13.3]\n[6.6;14.4]\n[7.7;15.5]");
+    }
+
 }
