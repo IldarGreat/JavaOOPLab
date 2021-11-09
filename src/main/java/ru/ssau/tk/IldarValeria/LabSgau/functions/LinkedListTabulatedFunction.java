@@ -2,11 +2,13 @@ package ru.ssau.tk.IldarValeria.LabSgau.functions;
 
 import ru.ssau.tk.IldarValeria.LabSgau.exceptions.*;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
+public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Serializable {
+    private static final long serialVersionUID = -4337454737791403234L;
     private int count = 0;
     private Node head;
 
