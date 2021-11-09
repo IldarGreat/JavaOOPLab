@@ -1,8 +1,11 @@
 package ru.ssau.tk.IldarValeria.LabSgau.io;
 
 import ru.ssau.tk.IldarValeria.LabSgau.functions.*;
+import ru.ssau.tk.IldarValeria.LabSgau.functions.factory.*;
 
 import java.io.*;
+import java.text.*;
+import java.util.*;
 
 public final class FunctionsIO {
 
@@ -27,6 +30,24 @@ public final class FunctionsIO {
             dataOutputStream.writeDouble(point.y);
         }
         dataOutputStream.flush();
+    }
+
+    public static TabulatedFunction readTabulatedFunction(BufferedReader reader, TabulatedFunctionFactory factory) throws IOException {
+        int count = Integer.parseInt(reader.readLine());
+        double[] xValues = new double[count];
+        double[] yValues = new double[count];
+        NumberFormat numberFormatter = NumberFormat.getInstance(Locale.forLanguageTag("ru"));
+        String line;
+        try {
+            for (int index = 0; index < count; index++) {
+                line = reader.readLine();
+                xValues[index] = numberFormatter.parse(line.split(" ")[0]).doubleValue();
+                yValues[index] = numberFormatter.parse(line.split(" ")[1]).doubleValue();
+            }
+        } catch (ParseException exception) {
+            throw new IOException(exception);
+        }
+        return factory.create(xValues, yValues);
     }
 
 }
