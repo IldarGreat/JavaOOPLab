@@ -2,11 +2,13 @@ package ru.ssau.tk.IldarValeria.LabSgau.functions;
 
 import ru.ssau.tk.IldarValeria.LabSgau.exceptions.*;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
+public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Serializable {
+    private static final long serialVersionUID = 1681846624654865521L;
     private final double[] xValues;
     private final double[] yValues;
     private final int count;
