@@ -76,9 +76,7 @@ public final class FunctionsIO {
     }
 
     public static void serializeXml(BufferedWriter writer, ArrayTabulatedFunction function) throws IOException {
-        XStream xStream = new XStream();
-        xStream.addPermission(AnyTypePermission.ANY);
-        writer.write(xStream.toXML(function));
+        writer.write(new XStream().toXML(function));
         writer.flush();
     }
 
@@ -90,6 +88,7 @@ public final class FunctionsIO {
 
     public static void serializeJson(BufferedWriter writer, ArrayTabulatedFunction function) throws IOException {
         writer.write(new ObjectMapper().writeValueAsString(function));
+        writer.flush();
     }
 
     public static ArrayTabulatedFunction deserializeJson(BufferedReader reader) throws IOException {

@@ -2,7 +2,11 @@ package ru.ssau.tk.IldarValeria.LabSgau.functions;
 
 import ru.ssau.tk.IldarValeria.LabSgau.exceptions.*;
 
-public abstract class AbstractTabulatedFunction implements TabulatedFunction {
+import java.io.Serializable;
+
+public abstract class AbstractTabulatedFunction implements TabulatedFunction , Serializable {
+    private static final long serialVersionUID = 2824260987755899279L;
+
     protected abstract int floorIndexOfX(double x);
 
     protected abstract double extrapolateLeft(double x);
