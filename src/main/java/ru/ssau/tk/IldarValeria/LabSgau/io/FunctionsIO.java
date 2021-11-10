@@ -1,5 +1,7 @@
 package ru.ssau.tk.IldarValeria.LabSgau.io;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.security.*;
 import ru.ssau.tk.IldarValeria.LabSgau.functions.*;
 import ru.ssau.tk.IldarValeria.LabSgau.functions.factory.*;
 
@@ -70,6 +72,19 @@ public final class FunctionsIO {
 
     public static TabulatedFunction deserialize(BufferedInputStream stream) throws IOException, ClassNotFoundException {
         return (TabulatedFunction) new ObjectInputStream(stream).readObject();
+    }
+
+    public static void serializeXml(BufferedWriter writer, ArrayTabulatedFunction function) throws IOException {
+        XStream xStream = new XStream();
+        xStream.addPermission(AnyTypePermission.ANY);
+        writer.write(xStream.toXML(function));
+        writer.flush();
+    }
+
+    public static ArrayTabulatedFunction deserializeXml(BufferedReader reader) {
+        XStream xStream = new XStream();
+        xStream.addPermission(AnyTypePermission.ANY);
+        return (ArrayTabulatedFunction) xStream.fromXML(reader);
     }
 
 
