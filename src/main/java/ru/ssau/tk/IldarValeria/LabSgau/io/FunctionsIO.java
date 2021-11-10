@@ -1,5 +1,6 @@
 package ru.ssau.tk.IldarValeria.LabSgau.io;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.security.*;
 import ru.ssau.tk.IldarValeria.LabSgau.functions.*;
@@ -85,6 +86,14 @@ public final class FunctionsIO {
         XStream xStream = new XStream();
         xStream.addPermission(AnyTypePermission.ANY);
         return (ArrayTabulatedFunction) xStream.fromXML(reader);
+    }
+
+    public static void serializeJson(BufferedWriter writer, ArrayTabulatedFunction function) throws IOException {
+        writer.write(new ObjectMapper().writeValueAsString(function));
+    }
+
+    public static ArrayTabulatedFunction deserializeJson(BufferedReader reader) throws IOException {
+        return new ObjectMapper().readerFor(ArrayTabulatedFunction.class).readValue(reader);
     }
 
 

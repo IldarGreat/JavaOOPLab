@@ -1,5 +1,6 @@
 package ru.ssau.tk.IldarValeria.LabSgau.functions;
 
+import com.fasterxml.jackson.annotation.*;
 import ru.ssau.tk.IldarValeria.LabSgau.exceptions.*;
 
 import java.io.Serializable;
@@ -9,11 +10,14 @@ import java.util.NoSuchElementException;
 
 public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Serializable {
     private static final long serialVersionUID = 1681846624654865521L;
+    @JsonFormat(shape = JsonFormat.Shape.ARRAY)
     private final double[] xValues;
+    @JsonFormat(shape = JsonFormat.Shape.ARRAY)
     private final double[] yValues;
     private final int count;
 
-    public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
+    @JsonCreator
+    public ArrayTabulatedFunction(@JsonProperty(value = "xValues") double[] xValues, @JsonProperty(value = "yValues") double[] yValues) {
         if (xValues.length < 2) {
             throw new IllegalArgumentException("Length of array less than minimum length (2)");
         }
