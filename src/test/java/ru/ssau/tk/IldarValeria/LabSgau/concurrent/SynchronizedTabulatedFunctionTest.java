@@ -4,6 +4,9 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.ssau.tk.IldarValeria.LabSgau.functions.*;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 public class SynchronizedTabulatedFunctionTest {
     private final SynchronizedTabulatedFunction synchronizedArrayTabulated = new SynchronizedTabulatedFunction(
             new ArrayTabulatedFunction(new double[]{3.4, 5.2, 6, 7.1}, new double[]{-2.4, 1.2, 3, 5.1}));
@@ -102,6 +105,37 @@ public class SynchronizedTabulatedFunctionTest {
 
     @Test
     public void testIterator() {
+        Iterator<Point> iterator = synchronizedArrayTabulated.iterator();
+        int element = 0;
+        while (iterator.hasNext()) {
+            Point point = iterator.next();
+            Assert.assertEquals(point.x, synchronizedArrayTabulated.getX(element));
+            Assert.assertEquals(point.y, synchronizedArrayTabulated.getY(element++));
+        }
+        Assert.assertThrows(NoSuchElementException.class, iterator::next);
+        Assert.assertEquals(element, synchronizedArrayTabulated.getCount());
+        element = 0;
+        for (Point point : synchronizedArrayTabulated) {
+            Assert.assertEquals(point.x, synchronizedArrayTabulated.getX(element));
+            Assert.assertEquals(point.y, synchronizedArrayTabulated.getY(element++));
+        }
+        Assert.assertEquals(element, synchronizedArrayTabulated.getCount());
+
+        iterator = synchronizedListTabulated.iterator();
+        element = 0;
+        while (iterator.hasNext()) {
+            Point point = iterator.next();
+            Assert.assertEquals(point.x, synchronizedListTabulated.getX(element));
+            Assert.assertEquals(point.y, synchronizedListTabulated.getY(element++));
+        }
+        Assert.assertEquals(element, synchronizedListTabulated.getCount());
+        Assert.assertThrows(NoSuchElementException.class, iterator::next);
+        element = 0;
+        for (Point point : synchronizedListTabulated) {
+            Assert.assertEquals(point.x, synchronizedListTabulated.getX(element));
+            Assert.assertEquals(point.y, synchronizedListTabulated.getY(element++));
+        }
+        Assert.assertEquals(element, synchronizedListTabulated.getCount());
     }
 
     @Test
