@@ -15,7 +15,7 @@ public class WriteTask implements Runnable {
     public void run() {
         for (int index = 0; index < tabulatedFunction.getCount(); index++) {
             tabulatedFunction.setY(index, value);
-            System.out.printf("Writing for index %d complete", index);
+            System.out.printf("Writing for index %d complete\n", index);
         }
     }
 }
