@@ -4,6 +4,7 @@ import ru.ssau.tk.IldarValeria.LabSgau.functions.*;
 
 public class MultiplyingTask implements Runnable {
     private final TabulatedFunction tabulatedFunction;
+    private boolean isCompleted = false;
 
     public MultiplyingTask(TabulatedFunction tabulatedFunction) {
         this.tabulatedFunction = tabulatedFunction;
@@ -17,5 +18,10 @@ public class MultiplyingTask implements Runnable {
             }
         }
         System.out.println("Thread " + Thread.currentThread().getName() + " has completed the task");
+        isCompleted = true;
+    }
+
+    public boolean isCompleted() {
+        return isCompleted;
     }
 }
