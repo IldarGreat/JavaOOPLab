@@ -1,5 +1,6 @@
 package ru.ssau.tk.IldarValeria.LabSgau.operations;
 
+import ru.ssau.tk.IldarValeria.LabSgau.concurrent.SynchronizedTabulatedFunction;
 import ru.ssau.tk.IldarValeria.LabSgau.functions.*;
 import ru.ssau.tk.IldarValeria.LabSgau.functions.factory.*;
 
@@ -34,6 +35,13 @@ public class TabulatedDifferentialOperator implements DifferentialOperator<Tabul
         yValues[points.length - 1] = yValues[points.length - 2];
         xValues[points.length - 1] = points[points.length - 1].x;
         return factory.create(xValues, yValues);
+    }
+
+    public TabulatedFunction deriveSynchronously(TabulatedFunction function) {
+        if (function instanceof SynchronizedTabulatedFunction) {
+            return ((SynchronizedTabulatedFunction) function).doSynchronously(this::derive);
+        }
+        return new SynchronizedTabulatedFunction(function).doSynchronously(this::derive);
     }
 
 }
