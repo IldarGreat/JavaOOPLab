@@ -99,4 +99,15 @@ public class SynchronizedTabulatedFunction implements TabulatedFunction {
             return tabulatedFunction.apply(x);
         }
     }
+
+    public interface Operation<T> {
+        T apply(SynchronizedTabulatedFunction synchronizedTabulatedFunction);
+    }
+
+    public <T> T doSynchronously(Operation<? extends T> operation) {
+        synchronized (mutex) {
+            return operation.apply(this);
+        }
+    }
+
 }
