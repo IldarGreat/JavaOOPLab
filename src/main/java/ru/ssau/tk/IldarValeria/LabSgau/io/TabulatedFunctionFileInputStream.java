@@ -16,8 +16,9 @@ public class TabulatedFunctionFileInputStream {
         } catch (IOException exception) {
             exception.printStackTrace();
         }
-        try (BufferedReader bufferedReader = new BufferedReader(
-                new InputStreamReader(System.in))) {
+        try {
+            BufferedReader bufferedReader = new BufferedReader(
+                    new InputStreamReader(System.in));
             System.out.println("Enter the size and values of the function");
             TabulatedFunction listTabulated = FunctionsIO.readTabulatedFunction(bufferedReader, new LinkedListTabulatedFunctionFactory());
             TabulatedDifferentialOperator listDiff = new TabulatedDifferentialOperator(new LinkedListTabulatedFunctionFactory());
