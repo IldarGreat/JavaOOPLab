@@ -1,12 +1,12 @@
 package ru.ssau.tk.IldarValeria.LabSgau.concurrent;
 
-import ru.ssau.tk.IldarValeria.LabSgau.functions.*;
+import ru.ssau.tk.IldarValeria.LabSgau.functions.TabulatedFunction;
 
-public class MultiplyingTask implements Runnable {
+public class ReadWriteTask implements Runnable {
     private final TabulatedFunction tabulatedFunction;
     private final Runnable postRunAction;
 
-    public MultiplyingTask(TabulatedFunction tabulatedFunction, Runnable postRunAction) {
+    public ReadWriteTask(TabulatedFunction tabulatedFunction, Runnable postRunAction) {
         this.tabulatedFunction = tabulatedFunction;
         this.postRunAction = postRunAction;
     }
@@ -19,11 +19,11 @@ public class MultiplyingTask implements Runnable {
             x = tabulatedFunction.getX(index);
             synchronized (tabulatedFunction) {
                 y = tabulatedFunction.getY(index);
-                System.out.printf("%s, i = %d, x = %f, old y = %f\n", Thread.currentThread().getName(), index, x, y);
-                tabulatedFunction.setY(index, y * 10);
+                System.out.printf("%s , before write: i = %d, x=%f, y=%f\n", Thread.currentThread().getName(), index, x, y);
+                tabulatedFunction.setY(index, y + 1);
                 y = tabulatedFunction.getY(index);
             }
-            System.out.printf("%s, i = %d, x = %f, new y = %f \n", Thread.currentThread().getName(), index, x, y);
+            System.out.printf("%s , after write: i = %d, x=%f, y=%f\n", Thread.currentThread().getName(), index, x, y);
         }
         if (postRunAction != null) {
             postRunAction.run();
