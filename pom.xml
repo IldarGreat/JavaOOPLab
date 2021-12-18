@@ -15,7 +15,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <mainClass>ru.ssau.tk.IldarValeria.LabSgau.ui.Main</mainClass>
+                    <mainClass>ru.ssau.tk.IldarValeria.LabSgau.ui.MainWindow.Main</mainClass>
                 </configuration>
             </plugin>
         </plugins>

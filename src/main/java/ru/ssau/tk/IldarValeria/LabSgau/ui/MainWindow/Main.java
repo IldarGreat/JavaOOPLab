@@ -1,4 +1,4 @@
-package ru.ssau.tk.IldarValeria.LabSgau.ui;
+package ru.ssau.tk.IldarValeria.LabSgau.ui.MainWindow;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +15,8 @@ public class Main extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout; // Основное приложение , содержит меню
 
+    public Main(){}
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
@@ -25,7 +27,7 @@ public class Main extends Application {
     private void showOverview() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("/Scene.fxml"));
+            loader.setLocation(Main.class.getResource("/MainScene/MainScene.fxml"));
             AnchorPane overview = (AnchorPane) loader.load();
             rootLayout.setCenter(overview);
         } catch (IOException e) {
@@ -36,7 +38,7 @@ public class Main extends Application {
     private void initMainLayout() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("/MainLayout.fxml"));
+            loader.setLocation(Main.class.getResource("/MainScene/WrapperMainScene.fxml"));
             rootLayout = (BorderPane) loader.load();
             InputStream iconStream = getClass().getResourceAsStream("/icons/mainIcon.png");
             Image image = new Image(iconStream);
@@ -49,6 +51,10 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public Stage getPrimaryStage(){
+        return this.primaryStage;
     }
 
     public static void main(String[] args) {
