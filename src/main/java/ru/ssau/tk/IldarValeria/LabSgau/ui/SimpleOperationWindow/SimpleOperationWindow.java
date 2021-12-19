@@ -13,8 +13,6 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ru.ssau.tk.IldarValeria.LabSgau.ui.MainWindow.Main;
-import ru.ssau.tk.IldarValeria.LabSgau.ui.controlers.MainController;
-import ru.ssau.tk.IldarValeria.LabSgau.ui.controlers.SimplestOperationController;
 
 import java.io.IOException;
 import java.io.InputStream;
