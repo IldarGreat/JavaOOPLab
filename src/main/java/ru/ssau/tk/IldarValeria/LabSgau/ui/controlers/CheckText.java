@@ -17,7 +17,7 @@ import java.io.InputStream;
 import java.net.URL;
 
 public class CheckText {
-
+    public static int points;
     @FXML
     private Button input;
 
@@ -32,8 +32,8 @@ public class CheckText {
     @FXML
     void click(ActionEvent event) throws IOException {
         try {
-            int points = Integer.parseInt(textField.getText());
-            if (points <= 0) {
+            points = Integer.parseInt(textField.getText());
+            if (points <= 1) {
                 new Errors();
             } else {
                 Stage stage = new Stage();

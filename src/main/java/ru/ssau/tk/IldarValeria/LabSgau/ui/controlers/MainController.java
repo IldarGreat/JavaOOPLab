@@ -8,7 +8,7 @@ import ru.ssau.tk.IldarValeria.LabSgau.ui.SimpleOperationWindow.SimpleOperationW
 import java.io.IOException;
 
 public class MainController {
-    private String operation;
+    public static String operation;
     public String getOperation(){return operation;}
     @FXML
     private Button DifferenceButton;
