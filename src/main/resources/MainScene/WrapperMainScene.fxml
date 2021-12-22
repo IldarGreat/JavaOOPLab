@@ -5,29 +5,26 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0"
-            prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="ru.ssau.tk.IldarValeria.LabSgau.ui.controlers.MenuController">
+<BorderPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.ssau.tk.IldarValeria.LabSgau.ui.controlers.MenuController">
     <top>
         <MenuBar prefHeight="25.0" prefWidth="600.0" BorderPane.alignment="CENTER_LEFT">
             <menus>
                 <Menu mnemonicParsing="false" text="Файл">
                     <items>
-                        <MenuItem fx:id="saveObject" mnemonicParsing="false" text="Сохранить объект"/>
-                        <MenuItem fx:id="createObject" mnemonicParsing="false" onAction="#createObject"
-                                  text="Создать объект"/>
-                        <MenuItem fx:id="openObject" mnemonicParsing="false" text="Открыть объект"/>
-                        <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#exit" text="Выйти"/>
+                        <MenuItem fx:id="saveObject" mnemonicParsing="false" text="Сохранить объект" />
+                        <MenuItem fx:id="createObject" mnemonicParsing="false" onAction="#createObject" text="Создать объект" />
+                        <MenuItem fx:id="openObject" mnemonicParsing="false" onAction="#openObject" text="Открыть объект" />
+                        <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#exit" text="Выйти" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Настройки">
                     <items>
-                        <MenuItem fx:id="whichFabric" mnemonicParsing="false" text="Какую фабрику использовать"/>
+                        <MenuItem fx:id="whichFabric" mnemonicParsing="false" text="Какую фабрику использовать" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Помощь">
                     <items>
-                        <MenuItem fx:id="about" mnemonicParsing="false" onAction="#about" text="О программе"/>
+                        <MenuItem fx:id="about" mnemonicParsing="false" onAction="#about" text="О программе" />
                     </items>
                 </Menu>
             </menus>

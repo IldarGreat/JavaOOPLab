@@ -7,15 +7,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import ru.ssau.tk.IldarValeria.LabSgau.ui.MainWindow.Main;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URL;
 
 public class MenuController {
+    @FXML
+    private BorderPane pane;
+
     @FXML
     private MenuItem about;
 
@@ -65,11 +67,27 @@ public class MenuController {
         stage.getIcons().add(image);
         stage.setTitle("С помощью чего создать табулированную функцию");
         stage.initModality(Modality.APPLICATION_MODAL);
-        // stage.initOwner(new Main().getPrimaryStage());
         stage.setResizable(false);
         stage.show();
         FXMLLoader loader = new FXMLLoader();
         URL xmlUrl = getClass().getResource("/Other/HowCreate.fxml");
+        loader.setLocation(xmlUrl);
+        Parent root = loader.load();
+        stage.setScene(new Scene(root));
+    }
+
+    @FXML
+    void openObject(ActionEvent event) throws IOException, ClassNotFoundException {
+        Stage stage = new Stage();
+        InputStream iconStream = getClass().getResourceAsStream("/icons/howCreate.png");
+        Image image = new Image(iconStream);
+        stage.getIcons().add(image);
+        stage.setTitle("Загрузка объекта");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
+        stage.show();
+        FXMLLoader loader = new FXMLLoader();
+        URL xmlUrl = getClass().getResource("/Other/OpenObject.fxml");
         loader.setLocation(xmlUrl);
         Parent root = loader.load();
         stage.setScene(new Scene(root));

@@ -9,55 +9,33 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-            prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="ru.ssau.tk.IldarValeria.LabSgau.ui.controlers.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.ssau.tk.IldarValeria.LabSgau.ui.controlers.MainController">
     <children>
-        <SplitPane dividerPositions="0.18561872909698995" layoutX="-6.0" layoutY="14.0" prefHeight="400.0"
-                   prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <SplitPane dividerPositions="0.18561872909698995" layoutX="-6.0" layoutY="14.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                     <children>
-                        <Button fx:id="SumButton" layoutX="5.0" layoutY="93.0" mnemonicParsing="false"
-                                onAction="#SumOperation" prefHeight="25.0" prefWidth="98.0" text="Сложение"
-                                textAlignment="CENTER" AnchorPane.bottomAnchor="283.0" AnchorPane.leftAnchor="5.0"
-                                AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="90.0"/>
-                        <Button fx:id="DifferenceButton" layoutX="5.0" layoutY="135.0" mnemonicParsing="false"
-                                onAction="#DifferenceOperation" prefHeight="25.0" prefWidth="93.0" text="Вычитание"
-                                textAlignment="CENTER" AnchorPane.bottomAnchor="235.0" AnchorPane.leftAnchor="5.0"
-                                AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="135.0"/>
-                        <Button fx:id="MultiplicationButton" layoutX="5.0" layoutY="185.0" mnemonicParsing="false"
-                                onAction="#MultiplicationOperation" prefHeight="25.0" prefWidth="93.0" text="Умножение"
-                                textAlignment="CENTER" AnchorPane.bottomAnchor="185.0" AnchorPane.leftAnchor="5.0"
-                                AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="185.0"/>
-                        <Button layoutX="5.0" layoutY="280.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="98.0"
-                                text="Дифференциировать" textAlignment="CENTER" AnchorPane.bottomAnchor="90.0"
-                                AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="280.0"/>
-                        <Button fx:id="DivideButton" layoutX="5.0" layoutY="236.0" mnemonicParsing="false"
-                                onAction="#DivideOperation" prefHeight="25.0" prefWidth="93.0" text="Деление"
-                                textAlignment="CENTER" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="5.0"
-                                AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="236.0"/>
+                        <Button fx:id="SumButton" layoutX="5.0" layoutY="93.0" mnemonicParsing="false" onAction="#SumOperation" prefHeight="25.0" prefWidth="98.0" text="Сложение" textAlignment="CENTER" AnchorPane.bottomAnchor="283.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="90.0" />
+                        <Button fx:id="DifferenceButton" layoutX="5.0" layoutY="135.0" mnemonicParsing="false" onAction="#DifferenceOperation" prefHeight="25.0" prefWidth="93.0" text="Вычитание" textAlignment="CENTER" AnchorPane.bottomAnchor="235.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="135.0" />
+                        <Button fx:id="MultiplicationButton" layoutX="5.0" layoutY="185.0" mnemonicParsing="false" onAction="#MultiplicationOperation" prefHeight="25.0" prefWidth="93.0" text="Умножение" textAlignment="CENTER" AnchorPane.bottomAnchor="185.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="185.0" />
+                        <Button layoutX="5.0" layoutY="280.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="98.0" text="Дифференциировать" textAlignment="CENTER" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="280.0" />
+                        <Button fx:id="DivideButton" layoutX="5.0" layoutY="236.0" mnemonicParsing="false" onAction="#DivideOperation" prefHeight="25.0" prefWidth="93.0" text="Деление" textAlignment="CENTER" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="236.0" />
                     </children>
                 </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                     <children>
-                        <Label layoutX="105.0" layoutY="28.0" text="Табулированная функция" textAlignment="CENTER"
-                               AnchorPane.bottomAnchor="332.0" AnchorPane.leftAnchor="105.0"
-                               AnchorPane.rightAnchor="105.0" AnchorPane.topAnchor="28.0">
+                        <Label layoutX="105.0" layoutY="28.0" text="Табулированная функция" textAlignment="CENTER" AnchorPane.bottomAnchor="332.0" AnchorPane.leftAnchor="105.0" AnchorPane.rightAnchor="105.0" AnchorPane.topAnchor="28.0">
                             <font>
-                                <Font size="23.0"/>
+                                <Font size="23.0" />
                             </font>
                         </Label>
-                        <TableView layoutX="112.0" layoutY="126.0" prefHeight="200.0" prefWidth="200.0"
-                                   AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="90.0"
-                                   AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="110.0">
+                        <TableView fx:id="mainTable" layoutX="112.0" layoutY="126.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="110.0">
                             <columns>
-                                <TableColumn prefWidth="75.0" text="X"/>
-                                <TableColumn prefWidth="75.0" text="Y"/>
+                                <TableColumn prefWidth="75.0" text="X" fx:id="xColumn" />
+                                <TableColumn fx:id="yColumn" prefWidth="75.0" text="Y" />
                             </columns>
                             <columnResizePolicy>
-                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                             </columnResizePolicy>
                         </TableView>
                     </children>

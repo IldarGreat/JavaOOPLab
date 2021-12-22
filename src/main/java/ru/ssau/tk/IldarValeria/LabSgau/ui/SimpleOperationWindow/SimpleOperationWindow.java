@@ -19,7 +19,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SimpleOperationWindow implements Initializable {
+public class SimpleOperationWindow {
     public Stage stage;
 
     public void init(String operation) throws IOException {
@@ -29,20 +29,16 @@ public class SimpleOperationWindow implements Initializable {
         stage.getIcons().add(image);
         stage.setTitle(operation);
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initOwner(new Main().getPrimaryStage());
+        // stage.initOwner(M);
         stage.setResizable(false);
         stage.show();
         FXMLLoader loader = new FXMLLoader();
         URL xmlUrl = getClass().getResource("/Operations/SimplestOperation.fxml");
         loader.setLocation(xmlUrl);
+        //  loader.setController();
         Parent root = loader.load();
         stage.setScene(new Scene(root));
 
     }
 
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    }
 }

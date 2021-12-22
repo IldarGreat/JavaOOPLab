@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import ru.ssau.tk.IldarValeria.LabSgau.ui.controlers.MainController;
 
 import java.io.IOException;
 import java.io.InputStream;
