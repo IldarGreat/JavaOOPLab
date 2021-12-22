@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="100.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Text layoutX="30.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Некорректное значение!"
+              textAlignment="CENTER" AnchorPane.bottomAnchor="36.7294921875" AnchorPane.leftAnchor="30.0"
+              AnchorPane.rightAnchor="29.197265625" AnchorPane.topAnchor="35.3388671875">
+            <font>
+                <Font size="21.0"/>
+            </font>
+        </Text>
+    </children>
+</AnchorPane>

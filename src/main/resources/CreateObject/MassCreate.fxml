@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="250.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.ssau.tk.IldarValeria.LabSgau.ui.controlers.CreateObjectOnMass">
+   <children>
+      <TableView fx:id="table" layoutX="125.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+          <TableColumn prefWidth="101.0" text="X" fx:id="xColumn" />
+          <TableColumn fx:id="yColumn" prefWidth="98.0" text="Y" />
+        </columns>
+      </TableView>
+      <Button fx:id="create" layoutX="363.0" layoutY="89.0" mnemonicParsing="false" onAction="#createObject" text="Создать" />
+      <TextField fx:id="textFieldForX" layoutX="8.0" layoutY="224.0" prefHeight="25.0" prefWidth="77.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="10.0" />
+      <TextField fx:id="textFieldForY" layoutX="359.0" layoutY="224.0" prefHeight="25.0" prefWidth="77.0" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="10.0" />
+      <Text layoutX="17.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Значение X" />
+      <Text layoutX="373.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Значение Y" />
+      <Button fx:id="addPoint" layoutX="148.0" layoutY="224.0" mnemonicParsing="false" onAction="#addPoint" text="Добавить пару значений" />
+   </children>
+</AnchorPane>

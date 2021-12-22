@@ -4,22 +4,30 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Text layoutX="235.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="О программе" textAlignment="CENTER">
-         <font>
-            <Font size="21.0" />
-         </font>
-      </Text>
-      <Text layoutX="7.0" layoutY="390.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*Сделано(криво) потом и кровью студентами 6206 Идиятовым Ильдаром и Атапиной Валерей">
-         <font>
-            <Font size="9.0" />
-         </font>
-      </Text>
-      <Text layoutX="14.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="На начальном экране приложения вы можете увидеть вашу табулированную функцию,которую вы" />
-      <Text layoutX="14.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="получили в результате каких-либо операций или загрузки функции из вне." />
-      <Text layoutX="14.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Обыкновенные математические операции над двумя табулированными функциями просты." />
-      <Text layoutX="14.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Вам нужно инициализировать первую и вторую функции,а затем нажать &quot;Результат&quot;.Полученную" />
-      <Text layoutX="14.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="табулированную функцию вы можете сохранить на главный экран приложения или на вашу систему" />
-   </children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Text layoutX="235.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="О программе"
+              textAlignment="CENTER">
+            <font>
+                <Font size="21.0"/>
+            </font>
+        </Text>
+        <Text layoutX="7.0" layoutY="390.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="*Сделано(криво) потом и кровью студентами 6206 Идиятовым Ильдаром и Атапиной Валерей">
+            <font>
+                <Font size="9.0"/>
+            </font>
+        </Text>
+        <Text layoutX="14.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="На начальном экране приложения вы можете увидеть вашу табулированную функцию,которую вы"/>
+        <Text layoutX="14.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="получили в результате каких-либо операций или загрузки функции из вне."/>
+        <Text layoutX="14.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Обыкновенные математические операции над двумя табулированными функциями просты."/>
+        <Text layoutX="14.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Вам нужно инициализировать первую и вторую функции,а затем нажать &quot;Результат&quot;.Полученную"/>
+        <Text layoutX="14.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="табулированную функцию вы можете сохранить на главный экран приложения или на вашу систему"/>
+    </children>
 </AnchorPane>

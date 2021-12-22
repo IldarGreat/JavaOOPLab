@@ -47,11 +47,29 @@ public class MenuController {
         stage.getIcons().add(image);
         stage.setTitle("О программе");
         stage.initModality(Modality.APPLICATION_MODAL);
-       // stage.initOwner(new Main().getPrimaryStage());
+        // stage.initOwner(new Main().getPrimaryStage());
         stage.setResizable(false);
         stage.show();
         FXMLLoader loader = new FXMLLoader();
         URL xmlUrl = getClass().getResource("/Other/About.fxml");
+        loader.setLocation(xmlUrl);
+        Parent root = loader.load();
+        stage.setScene(new Scene(root));
+    }
+
+    @FXML
+    void createObject(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        InputStream iconStream = getClass().getResourceAsStream("/icons/howCreate.png");
+        Image image = new Image(iconStream);
+        stage.getIcons().add(image);
+        stage.setTitle("С помощью чего создать табулированную функцию");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        // stage.initOwner(new Main().getPrimaryStage());
+        stage.setResizable(false);
+        stage.show();
+        FXMLLoader loader = new FXMLLoader();
+        URL xmlUrl = getClass().getResource("/Other/HowCreate.fxml");
         loader.setLocation(xmlUrl);
         Parent root = loader.load();
         stage.setScene(new Scene(root));

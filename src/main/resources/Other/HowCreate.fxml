@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="100.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ru.ssau.tk.IldarValeria.LabSgau.ui.controlers.HowOtherCreateController">
+    <children>
+        <Button fx:id="mass" layoutX="20.0" layoutY="38.0" mnemonicParsing="false" onAction="#createOnMass"
+                prefHeight="25.0" prefWidth="129.0" text="Массивов" AnchorPane.bottomAnchor="37.0"
+                AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="38.0"/>
+        <Button fx:id="function" layoutX="220.0" layoutY="38.0" mnemonicParsing="false" onAction="#createOnFunction"
+                text="Математической функции" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="220.0"
+                AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="38.0"/>
+    </children>
+</AnchorPane>

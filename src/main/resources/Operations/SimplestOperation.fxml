@@ -8,54 +8,65 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.ssau.tk.IldarValeria.LabSgau.ui.controlers.SimplestOperationController">
-   <children>
-      <Label fx:id="OperationName" layoutX="217.0" layoutY="14.0" text="Название операции" textAlignment="CENTER" AnchorPane.bottomAnchor="256.0" AnchorPane.leftAnchor="217.0" AnchorPane.rightAnchor="217.0" AnchorPane.topAnchor="14.0">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="192.0" layoutY="52.0" text="Табулированных функций" AnchorPane.bottomAnchor="221.0" AnchorPane.leftAnchor="192.0" AnchorPane.rightAnchor="191.0" AnchorPane.topAnchor="52.0">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <TableView layoutX="14.0" layoutY="133.0" prefHeight="124.0" prefWidth="144.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="442.0" AnchorPane.topAnchor="133.0">
-        <columns>
-          <TableColumn prefWidth="71.0" text="X" />
-          <TableColumn prefWidth="79.0" text="Y" />
-        </columns>
-      </TableView>
-      <TableView layoutX="228.0" layoutY="132.0" prefHeight="124.0" prefWidth="144.0" AnchorPane.bottomAnchor="45.0">
-         <columns>
-            <TableColumn prefWidth="71.0" text="X" />
-            <TableColumn prefWidth="79.0" text="Y" />
-         </columns>
-      </TableView>
-      <TableView layoutX="428.0" layoutY="132.0" prefHeight="124.0" prefWidth="144.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="441.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="131.0">
-         <columns>
-            <TableColumn prefWidth="71.0" text="X" />
-            <TableColumn prefWidth="79.0" text="Y" />
-         </columns>
-      </TableView>
-      <Button layoutX="14.0" layoutY="261.0" mnemonicParsing="false" text="Добавить элемент" AnchorPane.bottomAnchor="15.0" />
-      <Button layoutX="228.0" layoutY="261.0" mnemonicParsing="false" text="Удалить элемент" textAlignment="CENTER" AnchorPane.bottomAnchor="15.0" />
-      <Button layoutX="441.0" layoutY="261.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Вычислить" AnchorPane.bottomAnchor="15.0" />
-      <Button layoutX="507.0" layoutY="261.0" mnemonicParsing="false" text="Сохранить" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="511.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="261.0" />
-      <Text layoutX="15.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Первая функция" textAlignment="CENTER">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
-      <Text layoutX="228.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Вторая функция">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
-      <Text layoutX="441.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Результат">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
-   </children>
+<AnchorPane prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ru.ssau.tk.IldarValeria.LabSgau.ui.controlers.SimplestOperationController">
+    <children>
+        <Label fx:id="OperationName" layoutX="217.0" layoutY="14.0" text="Название операции" textAlignment="CENTER"
+               AnchorPane.bottomAnchor="256.0" AnchorPane.leftAnchor="217.0" AnchorPane.rightAnchor="217.0"
+               AnchorPane.topAnchor="14.0">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Label>
+        <Label layoutX="192.0" layoutY="52.0" text="Табулированных функций" AnchorPane.bottomAnchor="221.0"
+               AnchorPane.leftAnchor="192.0" AnchorPane.rightAnchor="191.0" AnchorPane.topAnchor="52.0">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Label>
+        <TableView layoutX="14.0" layoutY="133.0" prefHeight="124.0" prefWidth="144.0" AnchorPane.bottomAnchor="45.0"
+                   AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="442.0" AnchorPane.topAnchor="133.0">
+            <columns>
+                <TableColumn prefWidth="71.0" text="X"/>
+                <TableColumn prefWidth="79.0" text="Y"/>
+            </columns>
+        </TableView>
+        <TableView layoutX="228.0" layoutY="132.0" prefHeight="124.0" prefWidth="144.0" AnchorPane.bottomAnchor="45.0">
+            <columns>
+                <TableColumn prefWidth="71.0" text="X"/>
+                <TableColumn prefWidth="79.0" text="Y"/>
+            </columns>
+        </TableView>
+        <TableView layoutX="428.0" layoutY="132.0" prefHeight="124.0" prefWidth="144.0" AnchorPane.bottomAnchor="45.0"
+                   AnchorPane.leftAnchor="441.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="131.0">
+            <columns>
+                <TableColumn prefWidth="71.0" text="X"/>
+                <TableColumn prefWidth="79.0" text="Y"/>
+            </columns>
+        </TableView>
+        <Button layoutX="14.0" layoutY="261.0" mnemonicParsing="false" text="Добавить элемент"
+                AnchorPane.bottomAnchor="15.0"/>
+        <Button layoutX="228.0" layoutY="261.0" mnemonicParsing="false" text="Удалить элемент" textAlignment="CENTER"
+                AnchorPane.bottomAnchor="15.0"/>
+        <Button layoutX="441.0" layoutY="261.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0"
+                text="Вычислить" AnchorPane.bottomAnchor="15.0"/>
+        <Button layoutX="507.0" layoutY="261.0" mnemonicParsing="false" text="Сохранить" AnchorPane.bottomAnchor="15.0"
+                AnchorPane.leftAnchor="511.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="261.0"/>
+        <Text layoutX="15.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Первая функция"
+              textAlignment="CENTER">
+            <font>
+                <Font size="16.0"/>
+            </font>
+        </Text>
+        <Text layoutX="228.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Вторая функция">
+            <font>
+                <Font size="16.0"/>
+            </font>
+        </Text>
+        <Text layoutX="441.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Результат">
+            <font>
+                <Font size="16.0"/>
+            </font>
+        </Text>
+    </children>
 </AnchorPane>
