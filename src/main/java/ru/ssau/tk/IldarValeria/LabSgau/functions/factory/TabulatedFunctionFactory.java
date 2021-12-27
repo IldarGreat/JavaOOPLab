@@ -18,4 +18,5 @@ public interface TabulatedFunctionFactory {
         return new StrictTabulatedFunction(new UnmodifiableTabulatedFunction(create(xValues, yValues)));
     }
 
+    TabulatedFunction createFromFunction(MathFunction source, double xFrom, double xTo, int count);
 }
